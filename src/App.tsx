@@ -1,10 +1,8 @@
-import { Button } from "@/components/ui/button"
+import { Router} from './router';
  
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button onClick={() => {}}>Click me</Button>
-    </div>
+    <Router />
   )
 }
 
