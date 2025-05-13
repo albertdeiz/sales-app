@@ -9,7 +9,12 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 
 import type { ReactElement } from "react"
 
-interface FormValues {
+export interface LoginFormProps {
+  isLoading: boolean;
+  onLogin(values: FormValues): void
+}
+
+export interface FormValues {
   email: string
   password: string
 }
@@ -22,28 +27,20 @@ const schema = zod.object({
   password: zod
     .string()
     .min(1, "La contraseña es obligatoria")
-    .min(8, "La contraseña debe tener al menos 8 caracteres"),
 });
 
-export const LoginForm = (): ReactElement => {
+export const LoginForm = ({ isLoading, onLogin }: LoginFormProps): ReactElement => {
   const methods = useForm<FormValues>({
     resolver: zodResolver(schema),
-  })
-
-  const handleSubmit = (values: FormValues): void => {
-    console.log("values", values)
-    // Aquí puedes manejar la autenticación
-  }
-
-  console.log("errors", methods.formState.errors)
+  });
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleSubmit)} noValidate>
+      <form onSubmit={methods.handleSubmit(onLogin)} noValidate>
         <Card className="w-full w-sm mx-auto mt-10">
-        <CardHeader>
-          <CardTitle className="text-xl">Iniciar sesión</CardTitle>
-        </CardHeader>
+          <CardHeader>
+            <CardTitle className="text-xl">Iniciar sesión</CardTitle>
+          </CardHeader>
           <CardContent className="flex flex-col gap-3">
             <InputControlContainer
               name="email"
@@ -59,7 +56,7 @@ export const LoginForm = (): ReactElement => {
             />
           </CardContent>
           <CardFooter className="flex justify-between space-x-2">
-            <Button type="submit">Entrar</Button>
+            <Button type="submit" disabled={isLoading}>Entrar</Button>
             <Button variant="ghost" type="button">¿Olvidaste tu contraseña?</Button>
           </CardFooter>
         </Card>

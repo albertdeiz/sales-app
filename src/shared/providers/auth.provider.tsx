@@ -1,32 +1,29 @@
-import { useEffect, useState, type ReactNode } from "react";
-import type { User } from "../interfaces/auth.interfaces";
+import { useCallback, useState, type ReactNode } from "react";
 import { AuthContext } from "../contexts/auth.context";
+import { useLocalStorageContext } from "../hooks/use-local-storage-context";
 
-const TOKEN_KEY = "auth_token";
+import type { LoginResponse } from "@/interfaces/auth.interfaces";
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User>();
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const { setItem, removeItem, state: { user } } = useLocalStorageContext();
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem(TOKEN_KEY);
+  const login = useCallback(({ accessToken, user }: LoginResponse) => {
+    setItem('user', user);
+    setItem('authToken', accessToken);
+  }, [setItem]);
 
-    if (storedUser) setUser(JSON.parse(storedUser));
-    setIsLoading(false);
-  }, []);
-
-  const login = async (user: User) => {
-    setUser(user);
-    localStorage.setItem(TOKEN_KEY, JSON.stringify(user));
-  };
-
-  const logout = () => {
-    setUser(undefined);
-    localStorage.removeItem(TOKEN_KEY);
-  };
+  const logout = useCallback(() => {
+    removeItem('user');
+    removeItem('authToken');
+  }, [removeItem]);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading, setIsLoading }}>
       {children}
     </AuthContext.Provider>
   );
