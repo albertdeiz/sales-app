@@ -3,16 +3,23 @@ import {
   RouterProvider
 } from 'react-router';
 
-import { RootLayout } from './layouts';
-import { Home, Login } from './pages';
+import { AppLayout, RootLayout } from './components/layouts';
+import { Dashboard, Home, Login } from './pages';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/login',
     Component: RootLayout,
     children: [
+      { index: true, Component: Login },
+    ]
+  },
+  {
+    path: '/',
+    Component: AppLayout,
+    children: [
       { index: true, Component: Home },
-      { path: 'login', Component: Login }
+      { path: 'dashboard', Component: Dashboard },
     ]
   }
 ]);
