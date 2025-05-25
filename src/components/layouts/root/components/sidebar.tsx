@@ -1,15 +1,16 @@
-import { Home, User, Settings, Calendar } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useLocation, Link } from "react-router"
+import { Home, User, Settings, Calendar } from 'lucide-react';
+import { useLocation, Link } from 'react-router';
+
+import { Button } from '@/components/ui/button';
 
 const navItems = [
-  { label: "Dashboard", icon: Home, path: "/dashboard" },
-  { label: "Usuarios", icon: User, path: "/users" },
-  { label: "Configuración", icon: Settings, path: "/settings" },
-]
+  { label: 'Dashboard', icon: Home, path: '/dashboard' },
+  { label: 'Usuarios', icon: User, path: '/users' },
+  { label: 'Configuración', icon: Settings, path: '/settings' }
+];
 
 export const Sidebar = () => {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <aside className="w-60 bg-white border-r h-full p-4">
@@ -18,7 +19,7 @@ export const Sidebar = () => {
         {navItems.map(({ label, icon: Icon, path }) => (
           <Link key={path} to={path}>
             <Button
-              variant={location.pathname === path ? "secondary" : "ghost"}
+              variant={location.pathname === path ? 'secondary' : 'ghost'}
               className="w-full justify-start gap-2"
             >
               <Icon size={18} />
@@ -28,5 +29,5 @@ export const Sidebar = () => {
         ))}
       </nav>
     </aside>
-  )
-}
+  );
+};

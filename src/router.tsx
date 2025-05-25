@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     path: '/login',
     Component: RootLayout,
     children: [
-      { index: true, Component: Login },
+      { index: true, Component: Login }
     ]
   },
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     Component: AppLayout,
     children: [
       { index: true, Component: Home },
-      { path: 'dashboard', Component: Dashboard },
+      { path: 'dashboard', Component: Dashboard }
     ]
   }
 ]);

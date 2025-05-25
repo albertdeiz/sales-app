@@ -5,4 +5,4 @@ export const Dashboard = () => {
       <p className="mt-4">Welcome to your dashboard!</p>
     </div>
   );
-}
+};

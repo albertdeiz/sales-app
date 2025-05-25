@@ -1,5 +1,3 @@
-import type { User } from '@/shared/interfaces/auth.interfaces';
-
 export interface LoginParams {
   email: string;
   password: string;
@@ -7,5 +5,8 @@ export interface LoginParams {
 
 export interface LoginResponse {
   accessToken: string;
-  user: User;
+}
+
+export interface AuthParams {
+  accessToken?: string;
 }

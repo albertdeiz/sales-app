@@ -1,5 +1,9 @@
-import { useAuthMutation } from '@/api-query/queries/auth.query';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router';
+
+import { useAuthContext } from '@/shared/hooks/use-auth-context';
+import { useAuthMutation } from '@/api-query/queries/auth.query';
+
 import { LoginForm } from '../components/login-form';
 
 import type { ReactElement } from 'react';
@@ -7,6 +11,8 @@ import type { FormValues } from '../components/login-form';
 
 export const AuthContainer = (): ReactElement => {
   const { mutate, isPending } = useAuthMutation();
+  const navigate = useNavigate();
+  const { login } = useAuthContext();
 
   const handleLogin = ({
     email,
@@ -16,12 +22,12 @@ export const AuthContainer = (): ReactElement => {
       email,
       password
     }, {
-      onSuccess: (data) => {
-        console.log('Login exitoso', data);
+      onSuccess: (response) => {
+        login(response);
         toast.success('Login exitoso');
+        navigate('/dashboard');
       },
-      onSettled: (s) => {
-        console.log('Login settled', s);
+      onError: () => {
         toast.error('Error al iniciar sesión, verifique sus credenciales');
       }
     });

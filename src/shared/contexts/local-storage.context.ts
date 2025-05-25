@@ -1,16 +1,11 @@
 import { createContext } from 'react';
 
-import type { User } from '../interfaces/auth.interfaces';
-
-// Define aquí todas las claves posibles y sus tipos
 export interface LocalStorageSchema {
-  user: User,
   userPreferences: {
     theme: 'light' | 'dark';
     language: string;
   };
-  authToken: string;
-  sessionExpiry: Date;
+  accessToken: string;
 }
 
 export interface LocalStorageContextValues {

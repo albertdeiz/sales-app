@@ -1,29 +1,30 @@
-import { useCallback, useState, type ReactNode } from 'react';
-import { AuthContext } from '../contexts/auth.context';
-import { useLocalStorageContext } from '../hooks/use-local-storage-context';
+import { useCallback } from 'react';
+
+import { AuthContext } from '@/shared/contexts/auth.context';
+import { useLocalStorageContext } from '@/shared/hooks/use-local-storage-context';
+import { useCurrentUserQuery } from '@/api-query/queries/auth.query';
 
 import type { LoginResponse } from '@/interfaces/auth.interfaces';
+import type { ReactNode } from 'react';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { setItem, removeItem, state: { user } } = useLocalStorageContext();
-  const [isLoading, setIsLoading] = useState(true);
+  const { setItem, removeItem, state: { accessToken } } = useLocalStorageContext();
+  const { data: currentUser, isLoading } = useCurrentUserQuery({ accessToken });
 
-  const login = useCallback(({ accessToken, user }: LoginResponse) => {
-    setItem('user', user);
-    setItem('authToken', accessToken);
+  const login = useCallback(({ accessToken }: LoginResponse) => {
+    setItem('accessToken', accessToken);
   }, [setItem]);
 
   const logout = useCallback(() => {
-    removeItem('user');
-    removeItem('authToken');
+    removeItem('accessToken');
   }, [removeItem]);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading, setIsLoading }}>
+    <AuthContext.Provider value={{ user: currentUser, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

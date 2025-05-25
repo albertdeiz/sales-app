@@ -1,5 +1,5 @@
-import { Input } from "@/components/ui/input"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Input } from '@/components/ui/input';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 export const Topbar = () => {
   return (
@@ -9,5 +9,5 @@ export const Topbar = () => {
         <AvatarFallback>JD</AvatarFallback>
       </Avatar>
     </header>
-  )
-}
+  );
+};

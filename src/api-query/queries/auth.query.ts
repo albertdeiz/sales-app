@@ -1,24 +1,29 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useAuthContext } from '@/shared/hooks/use-auth-context';
-
-import { authenticate } from '../api/auth.api';
+import { getCurrentUser, login } from '@/api-query/api/auth/auth.api';
+import { AUTH_KEY } from '@/api-query/keys/auth.key';
 
 import type { UseMutationResult } from '@tanstack/react-query';
-import type { LoginParams, LoginResponse } from '@/interfaces/auth.interfaces';
+import type { AuthParams, LoginParams, LoginResponse } from '@/interfaces/auth.interfaces';
 
 export const useAuthMutation = (): UseMutationResult<LoginResponse, Error, LoginParams> => {
   const queryClient = useQueryClient();
-  const { login, setIsLoading } = useAuthContext();
-
-  setIsLoading(true);
+  const { login: loginUser } = useAuthContext();
 
   return useMutation({
-    mutationFn: authenticate,
+    mutationFn: login,
     onSuccess: (response) => {
-      setIsLoading(false);
-      login(response);
-      queryClient.invalidateQueries({ queryKey: ['auth'] });
+      loginUser(response);
+      queryClient.invalidateQueries({ queryKey: AUTH_KEY });
     }
+  });
+};
+
+export const useCurrentUserQuery = ({ accessToken }: AuthParams) => {
+  return useQuery({
+    queryKey: AUTH_KEY,
+    queryFn: () => getCurrentUser({ accessToken }),
+    staleTime: 1000 * 60 * 5 // 5 minutes
   });
 };

@@ -1,11 +1,11 @@
 import { createContext } from 'react';
-import type { User } from '../interfaces/auth.interfaces';
+
 import type { LoginResponse } from '@/interfaces/auth.interfaces';
+import type { User } from '@/interfaces/user.interfaces';
 
 interface AuthContextType {
   user?: User;
   isLoading: boolean;
-  setIsLoading(isLoading: boolean): void;
   logout(): void;
   login(data: LoginResponse): void;
 }
