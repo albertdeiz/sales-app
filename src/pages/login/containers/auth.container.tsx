@@ -1,32 +1,33 @@
 import { useAuthMutation } from "@/api-query/queries/auth.query";
+import { toast } from "sonner"
 import { LoginForm } from "../components/login-form";
 
-import { useState, type ReactElement } from "react"
+import type { ReactElement } from "react"
 import type { FormValues } from "../components/login-form";
 
 export const AuthContainer = (): ReactElement => {
-  const [ isLoading, setIsLoading ] = useState(false);
-  const { mutate } = useAuthMutation();
+  const { mutate, isPending } = useAuthMutation();
 
   const handleLogin = ({
     email,
     password,
   }: FormValues) => {
-    setIsLoading(true)
     mutate({
       email,
       password,
     }, {
       onSuccess: (data) => {
         console.log("Login exitoso", data);
+        toast.success("Login exitoso");
       },
-      onSettled: () => {
-        setIsLoading(false);
+      onSettled: (s) => {
+        console.log("Login settled", s);
+        toast.error("Error al iniciar sesión, verifique sus credenciales");
       }
     })
   };
 
   return (
-    <LoginForm onLogin={handleLogin} isLoading={isLoading} />
+    <LoginForm onLogin={handleLogin} isLoading={isPending} />
   )
 };

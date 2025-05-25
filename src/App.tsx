@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from "@/components/ui/sonner"
 
 import { Router} from './router';
 import { AuthProvider } from './shared/providers/auth.provider';
@@ -12,6 +13,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Router />
+          <Toaster />
         </AuthProvider>
       </QueryClientProvider>
     </LocalStorageProvider>
