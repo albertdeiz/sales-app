@@ -1,14 +1,22 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import standard from 'eslint-config-standard';
+import pluginN from 'eslint-plugin-n';
+import pluginPromise from 'eslint-plugin-promise';
+import pluginImport from 'eslint-plugin-import';
+import { defineConfig } from 'eslint/config';
 
-export default tseslint.config(
-  { ignores: ['dist'] },
+export default defineConfig([
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    ignores: ['coverage/', 'dist/']
+  },
+  {
     files: ['**/*.{ts,tsx}'],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -25,4 +33,18 @@ export default tseslint.config(
       ],
     },
   },
-)
+  pluginReact.configs.flat.recommended,
+  {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    plugins: {
+      n: pluginN,
+      import: pluginImport,
+      promise: pluginPromise
+    },
+    rules: {
+      ...standard.rules,
+      semi: ['error', 'always'],
+      'react/react-in-jsx-scope': 'off'
+    }
+  }
+]);
