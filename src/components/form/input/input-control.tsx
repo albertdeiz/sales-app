@@ -1,6 +1,5 @@
 import { Controller } from 'react-hook-form';
 
-
 import type { ReactElement } from 'react';
 import type { ControllerProps } from 'react-hook-form';
 import { FormControl, type FormControlProps } from '@/components/ui/form-control';
@@ -30,6 +29,7 @@ export const InputControl = ({
         htmlFor={name}
       >
         <Input
+          id={name}
           {...field}
           ref={ref}
           {...rest}

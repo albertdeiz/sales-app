@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet } from 'react-router';
 
 export const RootLayout = () => {
   return (
@@ -6,4 +6,4 @@ export const RootLayout = () => {
       <Outlet />
     </div>
   );
-}
+};

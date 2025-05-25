@@ -1,8 +1,8 @@
-import { useCallback, useState, type ReactNode } from "react";
-import { AuthContext } from "../contexts/auth.context";
-import { useLocalStorageContext } from "../hooks/use-local-storage-context";
+import { useCallback, useState, type ReactNode } from 'react';
+import { AuthContext } from '../contexts/auth.context';
+import { useLocalStorageContext } from '../hooks/use-local-storage-context';
 
-import type { LoginResponse } from "@/interfaces/auth.interfaces";
+import type { LoginResponse } from '@/interfaces/auth.interfaces';
 
 interface AuthProviderProps {
   children: ReactNode;

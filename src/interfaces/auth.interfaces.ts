@@ -1,4 +1,4 @@
-import type { User } from "@/shared/interfaces/auth.interfaces";
+import type { User } from '@/shared/interfaces/auth.interfaces';
 
 export interface LoginParams {
   email: string;

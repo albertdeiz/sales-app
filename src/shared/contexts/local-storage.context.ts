@@ -1,6 +1,6 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
-import type { User } from "../interfaces/auth.interfaces";
+import type { User } from '../interfaces/auth.interfaces';
 
 // Define aquí todas las claves posibles y sus tipos
 export interface LocalStorageSchema {

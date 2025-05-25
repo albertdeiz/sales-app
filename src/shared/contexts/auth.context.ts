@@ -1,7 +1,6 @@
-import { createContext } from "react";
-import type { User } from "../interfaces/auth.interfaces";
-import type { LoginResponse } from "@/interfaces/auth.interfaces";
-
+import { createContext } from 'react';
+import type { User } from '../interfaces/auth.interfaces';
+import type { LoginResponse } from '@/interfaces/auth.interfaces';
 
 interface AuthContextType {
   user?: User;
@@ -10,6 +9,5 @@ interface AuthContextType {
   logout(): void;
   login(data: LoginResponse): void;
 }
-
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -1,14 +1,14 @@
-import { useCallback, useMemo, useState, useEffect } from "react";
-import { LocalStorageContext } from "../contexts/local-storage.context";
+import { useCallback, useMemo, useState, useEffect } from 'react';
+import { LocalStorageContext } from '../contexts/local-storage.context';
 
-import type { ReactNode } from "react";
-import type { LocalStorageContextValues, LocalStorageSchema } from "../contexts/local-storage.context";
+import type { ReactNode } from 'react';
+import type { LocalStorageContextValues, LocalStorageSchema } from '../contexts/local-storage.context';
 
 interface LocalStorageProviderProps {
   children: ReactNode;
 }
 
-export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
+export function LocalStorageProvider ({ children }: LocalStorageProviderProps) {
   const [storageState, setStorageState] = useState<Partial<LocalStorageSchema>>({});
 
   const encode = useCallback((value: unknown): string => {
@@ -17,13 +17,13 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
     return btoa(encodeURIComponent(stringValue));
   }, []);
 
-  const decode = useCallback(<T,>(encodedValue: string): T => {
+  const decode = useCallback(<T, >(encodedValue: string): T => {
     try {
       const decodedString = decodeURIComponent(atob(encodedValue));
 
       return JSON.parse(decodedString) as T;
     } catch (error) {
-      console.error("Error decodificando valor de localStorage:", error);
+      console.error('Error decodificando valor de localStorage:', error);
 
       return {} as T;
     }
@@ -45,9 +45,9 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
         }
       }
     } catch (error) {
-      console.error("Error al inicializar el estado desde localStorage:", error);
+      console.error('Error al inicializar el estado desde localStorage:', error);
     }
-    
+
     setStorageState(initialState);
   }, [decode]);
 
@@ -130,7 +130,7 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
 
       setStorageState({});
     } catch (error) {
-      console.error("Error al limpiar localStorage:", error);
+      console.error('Error al limpiar localStorage:', error);
     }
   }, []);
 

@@ -1,13 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Toaster } from "@/components/ui/sonner"
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from '@/components/ui/sonner';
 
-import { Router} from './router';
+import { Router } from './router';
 import { AuthProvider } from './shared/providers/auth.provider';
 import { LocalStorageProvider } from './shared/providers/local-storage.provider';
 
-const queryClient = new QueryClient()
- 
-function App() {
+const queryClient = new QueryClient();
+
+function App () {
   return (
     <LocalStorageProvider>
       <QueryClientProvider client={queryClient}>
@@ -17,7 +17,7 @@ function App() {
         </AuthProvider>
       </QueryClientProvider>
     </LocalStorageProvider>
-  )
+  );
 };
 
-export default App
+export default App;
