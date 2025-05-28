@@ -3,7 +3,7 @@ import {
   RouterProvider
 } from 'react-router';
 
-import { AppLayout, RootLayout } from './components/layouts';
+import { AppBaseLayout, RootLayout } from './components/layouts';
 import { Dashboard, Home, Login } from './pages';
 
 const router = createBrowserRouter([
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    Component: AppLayout,
+    Component: AppBaseLayout,
     children: [
       { index: true, Component: Home },
       { path: 'dashboard', Component: Dashboard }
