@@ -8,7 +8,7 @@ interface LocalStorageProviderProps {
   children: ReactNode;
 }
 
-export function LocalStorageProvider ({ children }: LocalStorageProviderProps) {
+export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
   const [storageState, setStorageState] = useState<Partial<LocalStorageSchema>>({});
 
   const encode = useCallback((value: unknown): string => {
@@ -63,7 +63,7 @@ export function LocalStorageProvider ({ children }: LocalStorageProviderProps) {
         } else if (event.newValue) {
           setStorageState(prev => ({
             ...prev,
-            [event.key as keyof LocalStorageSchema]: decode(event.newValue!)
+            [event.key as keyof LocalStorageSchema]: decode(event.newValue!),
           }));
         }
       }
@@ -77,7 +77,7 @@ export function LocalStorageProvider ({ children }: LocalStorageProviderProps) {
   // Funciones para manejar localStorage con tipos específicos
   const setItem = useCallback(<K extends keyof LocalStorageSchema>(
     key: K,
-    value: LocalStorageSchema[K]
+    value: LocalStorageSchema[K],
   ): void => {
     try {
       const encodedValue = encode(value);
@@ -85,7 +85,7 @@ export function LocalStorageProvider ({ children }: LocalStorageProviderProps) {
 
       setStorageState(prev => ({
         ...prev,
-        [key]: value
+        [key]: value,
       }));
     } catch (error) {
       console.error(`Error al guardar ${String(key)} en localStorage:`, error);
@@ -94,7 +94,7 @@ export function LocalStorageProvider ({ children }: LocalStorageProviderProps) {
 
   const getItem = useCallback(<K extends keyof LocalStorageSchema>(
     key: K,
-    defaultValue?: LocalStorageSchema[K]
+    defaultValue?: LocalStorageSchema[K],
   ): LocalStorageSchema[K] | undefined => {
     try {
       const item = localStorage.getItem(String(key));
@@ -139,7 +139,7 @@ export function LocalStorageProvider ({ children }: LocalStorageProviderProps) {
     getItem,
     removeItem,
     clear,
-    state: storageState
+    state: storageState,
   }), [setItem, getItem, removeItem, clear, storageState]);
 
   return (

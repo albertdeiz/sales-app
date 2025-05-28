@@ -6,8 +6,8 @@ export const axios = baseAxios.create({
   baseURL,
   headers: {
     'Content-Type': 'application/json',
-    Accept: 'application/json'
+    Accept: 'application/json',
   },
   timeout: 10000,
-  validateStatus: (status: number) => status >= 200 && status < 300
+  validateStatus: (status: number) => status >= 200 && status < 300,
 });

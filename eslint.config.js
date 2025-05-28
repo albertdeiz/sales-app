@@ -12,26 +12,26 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   {
-    ignores: ['coverage/', 'dist/']
+    ignores: ['coverage/', 'dist/'],
   },
   {
     files: ['**/*.{ts,tsx}'],
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser
+      globals: globals.browser,
     },
     plugins: {
       'react-hooks': reactHooks,
-      'react-refresh': reactRefresh
+      'react-refresh': reactRefresh,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true }
-      ]
-    }
+        { allowConstantExport: true },
+      ],
+    },
   },
   pluginReact.configs.flat.recommended,
   {
@@ -39,12 +39,18 @@ export default defineConfig([
     plugins: {
       n: pluginN,
       import: pluginImport,
-      promise: pluginPromise
+      promise: pluginPromise,
     },
     rules: {
       ...standard.rules,
       semi: ['error', 'always'],
-      'react/react-in-jsx-scope': 'off'
-    }
-  }
+      'comma-dangle': ['error', 'always-multiline'],
+      'space-before-function-paren': ['error', {
+        anonymous: 'never',
+        named: 'never',
+        asyncArrow: 'never',
+      }],
+      'react/react-in-jsx-scope': 'off',
+    },
+  },
 ]);

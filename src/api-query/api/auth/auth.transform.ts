@@ -8,7 +8,7 @@ export const transformUser = (user: any): any => {
     role: {
       name: user.role?.name || 'User',
       routePermissions: user.role?.routePermissions || [],
-      actionPermissions: user.role?.actionPermissions || []
-    }
+      actionPermissions: user.role?.actionPermissions || [],
+    },
   };
 };

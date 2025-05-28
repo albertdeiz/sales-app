@@ -16,11 +16,11 @@ export const AuthContainer = (): ReactElement => {
 
   const handleLogin = ({
     email,
-    password
+    password,
   }: FormValues) => {
     mutate({
       email,
-      password
+      password,
     }, {
       onSuccess: (response) => {
         login(response);
@@ -29,7 +29,7 @@ export const AuthContainer = (): ReactElement => {
       },
       onError: () => {
         toast.error('Error al iniciar sesión, verifique sus credenciales');
-      }
+      },
     });
   };
 

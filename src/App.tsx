@@ -7,7 +7,7 @@ import { LocalStorageProvider } from './shared/providers/local-storage.provider'
 
 const queryClient = new QueryClient();
 
-function App () {
+function App() {
   return (
     <LocalStorageProvider>
       <QueryClientProvider client={queryClient}>

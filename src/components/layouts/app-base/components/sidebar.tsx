@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 const navItems = [
   { label: 'Dashboard', icon: Home, path: '/dashboard' },
   { label: 'Usuarios', icon: User, path: '/users' },
-  { label: 'Configuración', icon: Settings, path: '/settings' }
+  { label: 'Configuración', icon: Settings, path: '/settings' },
 ];
 
 export const Sidebar = () => {

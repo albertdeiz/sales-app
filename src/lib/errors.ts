@@ -7,10 +7,10 @@ export class ApiError extends Error {
   public message: string;
   public details?: any;
 
-  constructor (
+  constructor(
     status: number,
     message: string,
-    details?: any
+    details?: any,
   ) {
     super(message);
     this.name = 'ApiError';
@@ -19,11 +19,11 @@ export class ApiError extends Error {
     this.details = details;
   }
 
-  static fromAxiosError (error: AxiosError): ApiError {
+  static fromAxiosError(error: AxiosError): ApiError {
     return new ApiError(
       error.response?.status || 500,
       error.message || 'An error occurred',
-      error.response?.data
+      error.response?.data,
     );
   }
 };

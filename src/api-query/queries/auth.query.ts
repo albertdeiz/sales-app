@@ -16,7 +16,7 @@ export const useAuthMutation = (): UseMutationResult<LoginResponse, Error, Login
     onSuccess: (response) => {
       loginUser(response);
       queryClient.invalidateQueries({ queryKey: AUTH_KEY });
-    }
+    },
   });
 };
 
@@ -24,6 +24,6 @@ export const useCurrentUserQuery = ({ accessToken }: AuthParams) => {
   return useQuery({
     queryKey: AUTH_KEY,
     queryFn: () => getCurrentUser({ accessToken }),
-    staleTime: 1000 * 60 * 5 // 5 minutes
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };

@@ -8,12 +8,12 @@ import { transformUser } from './auth.transform';
 import type { AuthParams, LoginParams, LoginResponse } from '@/interfaces/auth.interfaces';
 import type { User } from '@/shared/interfaces/auth.interfaces';
 
-export const login = async (params: LoginParams): Promise<LoginResponse> => {
+export const login = async(params: LoginParams): Promise<LoginResponse> => {
   try {
     const { data } = await axios.post('/v1/sales/auth', params);
 
     return {
-      accessToken: data.token
+      accessToken: data.token,
     };
   } catch (error: unknown) {
     if (isAxiosError(error)) {
@@ -24,12 +24,12 @@ export const login = async (params: LoginParams): Promise<LoginResponse> => {
   }
 };
 
-export const getCurrentUser = async ({ accessToken }: AuthParams): Promise<User> => {
+export const getCurrentUser = async({ accessToken }: AuthParams): Promise<User> => {
   try {
     const { data } = await axios.get('/v1/sales/auth/test', {
       headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
 
     return transformUser(data);

@@ -8,7 +8,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  }
+      // eslint-disable-next-line no-undef
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 });

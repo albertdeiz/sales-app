@@ -26,12 +26,12 @@ const schema = zod.object({
     .email('El correo electrónico no es válido'),
   password: zod
     .string()
-    .min(1, 'La contraseña es obligatoria')
+    .min(1, 'La contraseña es obligatoria'),
 });
 
 export const LoginForm = ({ isLoading, onLogin }: LoginFormProps): ReactElement => {
   const methods = useForm<FormValues>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
   });
 
   return (
