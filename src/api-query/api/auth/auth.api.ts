@@ -6,7 +6,7 @@ import { ApiError } from '@/lib/errors';
 import { transformUser } from './auth.transform';
 
 import type { AuthParams, LoginParams, LoginResponse } from '@/interfaces/auth.interfaces';
-import type { User } from '@/shared/interfaces/auth.interfaces';
+import type { User } from '@/interfaces/user.interfaces';
 
 export const login = async(params: LoginParams): Promise<LoginResponse> => {
   try {

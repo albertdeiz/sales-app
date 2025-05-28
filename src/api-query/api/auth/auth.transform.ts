@@ -2,6 +2,7 @@
 
 export const transformUser = (user: any): any => {
   return {
+    id: user.id ?? +user.sub,
     firstName: user.firstName || '',
     lastName: user.lastName || '',
     email: user.email || '',

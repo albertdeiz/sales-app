@@ -1,12 +1,11 @@
-import { Home, User, Settings, Calendar } from 'lucide-react';
+import { Home, User, Calendar } from 'lucide-react';
 import { useLocation, Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 
 const navItems = [
   { label: 'Dashboard', icon: Home, path: '/dashboard' },
-  { label: 'Usuarios', icon: User, path: '/users' },
-  { label: 'Configuración', icon: Settings, path: '/settings' },
+  { label: 'Usuarios', icon: User, path: '/settings/users' },
 ];
 
 export const Sidebar = () => {
