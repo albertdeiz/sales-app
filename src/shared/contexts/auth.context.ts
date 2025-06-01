@@ -5,6 +5,7 @@ import type { User } from '@/interfaces/user.interfaces';
 
 interface AuthContextType {
   user?: User;
+  accessToken?: string;
   isLoading: boolean;
   logout(): void;
   login(data: LoginResponse): void;

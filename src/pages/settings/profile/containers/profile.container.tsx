@@ -4,11 +4,9 @@ import { useUserMutation } from '@/api-query/queries/users/users.mutations';
 import { useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { AUTH_KEY } from '@/api-query/keys/auth.key';
-import { useLocalStorageContext } from '@/shared/hooks/use-local-storage-context';
 
 export const ProfileContainer = () => {
-  const { state: { accessToken } } = useLocalStorageContext();
-  const { user } = useAuthContext();
+  const { user, accessToken } = useAuthContext();
   const { mutateAsync, isPending } = useUserMutation();
   const queryClient = useQueryClient();
 

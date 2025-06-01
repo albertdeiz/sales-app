@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { AuthContext } from '@/shared/contexts/auth.context';
 import { useLocalStorageContext } from '@/shared/hooks/use-local-storage-context';
@@ -13,7 +13,7 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { setItem, removeItem, state: { accessToken } } = useLocalStorageContext();
-  const { data: currentUser, isLoading } = useCurrentUserQuery({ accessToken });
+  const { data: currentUser, isLoading = true, isError } = useCurrentUserQuery({ accessToken });
 
   const login = useCallback(({ accessToken }: LoginResponse) => {
     setItem('accessToken', accessToken);
@@ -23,8 +23,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     removeItem('accessToken');
   }, [removeItem]);
 
+  useEffect(() => {
+    if (isError) {
+      logout();
+    }
+  }, [isError, logout]);
+
   return (
-    <AuthContext.Provider value={{ user: currentUser, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user: currentUser, login, logout, isLoading, accessToken }}>
       {children}
     </AuthContext.Provider>
   );
