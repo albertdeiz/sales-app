@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -7,6 +8,8 @@ import { AppBaseLayout, RootLayout } from './components/layouts';
 import { Dashboard, Home, Login } from './pages';
 import { UsersContainer } from './pages/settings/users';
 import { ProfileContainer } from './pages/settings/profile';
+
+const WarehousesContainer = lazy(() => import('./pages/warehouses'));
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: 'dashboard', Component: Dashboard },
+      { path: 'warehouses', Component: WarehousesContainer },
       {
         path: 'settings',
         children: [
