@@ -1,5 +1,5 @@
 import { useQuery, type UseQueryResult } from '@tanstack/react-query';
-import { getWarehouses } from '../api/warehouses/warehouses.api';
+import { getWarehouse, getWarehouses } from '../api/warehouses/warehouses.api';
 import type { ListWarehousesParams } from '../api/warehouses/warehouses.api';
 import type { ApiError } from '@/lib/errors';
 import type { Warehouse } from '@/interfaces/warehouse.interfaces';
@@ -12,5 +12,16 @@ export const useWarehousesQuery = (params?: ListWarehousesParams): UseQueryResul
     queryKey: ['warehouses', params],
     queryFn: () => getWarehouses({ ...params, accessToken }),
     staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const useWarehouseQuery = (id = 0): UseQueryResult<Warehouse, ApiError> => {
+  const { accessToken } = useAuthContext();
+
+  return useQuery<Warehouse, ApiError>({
+    queryKey: ['warehouse', id],
+    queryFn: () => getWarehouse({ id, accessToken }),
+    staleTime: 1000 * 60 * 5,
+    enabled: !!id,
   });
 };

@@ -13,6 +13,10 @@ export interface ListWarehousesParams extends AuthParams {
   sort?: string;
 }
 
+export interface GetWarehouseParams extends AuthParams {
+  id: number;
+}
+
 export const getWarehouses = async(params: ListWarehousesParams): Promise<Warehouse[]> => {
   const { page, pageSize, search, sort, accessToken } = params ?? {};
 
@@ -37,6 +41,24 @@ export const getWarehouses = async(params: ListWarehousesParams): Promise<Wareho
     });
 
     return warehouses.map(warehouseTransform);
+  } catch (error) {
+    if (isAxiosError(error)) {
+      throw ApiError.fromAxiosError(error);
+    }
+
+    throw new ApiError(500, 'An unexpected error occurred');
+  }
+};
+
+export const getWarehouse = async({ id, accessToken }: GetWarehouseParams): Promise<Warehouse> => {
+  try {
+    const { data: { warehouses } } = await axios.get(`/v1/sales/warehouse/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return warehouseTransform(warehouses[0]);
   } catch (error) {
     if (isAxiosError(error)) {
       throw ApiError.fromAxiosError(error);

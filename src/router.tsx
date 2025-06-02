@@ -25,7 +25,13 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: 'dashboard', Component: Dashboard },
-      { path: 'warehouses', Component: WarehousesContainer },
+      {
+        path: 'warehouses',
+        children: [
+          { index: true, Component: WarehousesContainer },
+          { path: ':id', Component: WarehousesContainer },
+        ],
+      },
       {
         path: 'settings',
         children: [

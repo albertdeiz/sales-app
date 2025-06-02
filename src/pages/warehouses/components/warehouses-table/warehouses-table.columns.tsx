@@ -12,6 +12,7 @@ import {
 
 import type { Warehouse } from '@/interfaces/warehouse.interfaces';
 import type { ColumnDef } from '@tanstack/react-table';
+import { Link } from 'react-router';
 
 export const columns: ColumnDef<Warehouse>[] = [
   {
@@ -47,8 +48,8 @@ export const columns: ColumnDef<Warehouse>[] = [
             >
               Copiar ID
             </DropdownMenuItem>
-            < DropdownMenuSeparator />
-            <DropdownMenuItem>Ver almacén</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild><Link to={`/warehouses/${warehouse.id}`}>Ver almacén</Link></DropdownMenuItem>
             <DropdownMenuItem className='text-red-500'>Eliminar almacén</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
