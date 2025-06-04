@@ -22,7 +22,7 @@ export const WarehousesContainer = () => {
   return (
     <div className='bg-white'>
       <WarehousesTable data={data} isLoading={isLoading} />
-      {warehouse && <WarehouseDrawer isOpen={!!id} onOpenChange={handleOnChangeIsOpen} data={warehouse} />}
+      <WarehouseDrawer isOpen={!!id} onOpenChange={handleOnChangeIsOpen} data={warehouse} />
     </div>
   );
 };

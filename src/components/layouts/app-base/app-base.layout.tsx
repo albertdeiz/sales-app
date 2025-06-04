@@ -5,6 +5,7 @@ import { Sidebar } from './components/sidebar';
 import { TopbarContainer } from './containers/topbar.container';
 
 import { useAuthContext } from '@/shared/hooks/use-auth-context';
+import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 
 export const AppBaseLayout = () => {
   const navigate = useNavigate();
@@ -16,17 +17,17 @@ export const AppBaseLayout = () => {
     }
   }, [user, navigate, isLoading]);
 
-  return !isLoading
-    ? (<div className="flex h-screen bg-muted">
-      <Sidebar />
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <TopbarContainer />
-        <main className="p-6 overflow-auto flex-1">
-          <Outlet />
-        </main>
-      </div>
-    </div>)
-    : (<div className="flex items-center justify-center h-screen">
-      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary" />
-    </div>);
+  return (
+    <div className="flex h-screen bg-muted">
+      <LoadingWrapper isLoading={isLoading}>
+        <Sidebar />
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <TopbarContainer />
+          <main className="p-6 overflow-auto flex-1">
+            <Outlet />
+          </main>
+        </div>
+      </LoadingWrapper>
+    </div>
+  );
 };

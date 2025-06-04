@@ -8,11 +8,12 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
+import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 import type { Warehouse } from '@/interfaces/warehouse.interfaces';
 import type { ReactElement } from 'react';
 
 interface WarehouseDrawerProps {
-  data: Warehouse;
+  data?: Warehouse;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
 }
@@ -21,18 +22,20 @@ export const WarehouseDrawer = ({ isOpen, data, onOpenChange }: WarehouseDrawerP
   return (
     <Drawer open={isOpen} onOpenChange={onOpenChange} direction='right'>
       <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Almacén {data.id}</DrawerTitle>
-          <DrawerDescription>{Object.entries(data).map(([key, value]) => <div key={key}>
-            <strong>{key}:</strong> {value.toString()}
-          </div>)}</DrawerDescription>
-        </DrawerHeader>
-        <DrawerFooter>
-          <Button>Editar</Button>
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        <LoadingWrapper isLoading={!data}>
+          <DrawerHeader>
+            <DrawerTitle>Almacén {data?.id}</DrawerTitle>
+            <DrawerDescription>{Object.entries(data ?? {}).map(([key, value]) => <div key={key}>
+              <strong>{key}:</strong> {value.toString()}
+            </div>)}</DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <Button>Editar</Button>
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </LoadingWrapper>
       </DrawerContent>
     </Drawer>
   );
