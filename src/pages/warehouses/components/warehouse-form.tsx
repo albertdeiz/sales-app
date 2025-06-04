@@ -7,9 +7,7 @@ import { InputControlContainer } from '@/components/form/input/input-control.con
 import { Button } from '@/components/ui/button';
 
 import type { ReactElement } from 'react';
-import { DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
 import type { Warehouse } from '@/interfaces/warehouse.interfaces';
-import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 
 export interface FormValues {
   name: string;
@@ -19,7 +17,6 @@ export interface FormValues {
 
 export interface WarehouseFormProps {
   data?: Warehouse;
-  isLoading: boolean;
   onSubmit(values: FormValues): void
 }
 
@@ -35,7 +32,7 @@ const schema = zod.object({
     .default(false),
 });
 
-export const WarehouseForm = ({ data, isLoading, onSubmit }: WarehouseFormProps): ReactElement => {
+export const WarehouseForm = ({ data, onSubmit }: WarehouseFormProps): ReactElement => {
   const methods = useForm<FormValues>({
     resolver: zodResolver(schema),
     values: {
@@ -46,34 +43,24 @@ export const WarehouseForm = ({ data, isLoading, onSubmit }: WarehouseFormProps)
   });
 
   return (
-    <DrawerContent>
-      <FormProvider {...methods}>
-        <LoadingWrapper isLoading={!data}>
-          <form onSubmit={methods.handleSubmit(onSubmit)} noValidate className='h-full flex flex-col'>
-            <DrawerHeader>
-              <DrawerTitle>Almacén {data?.id}</DrawerTitle>
-              <InputControlContainer
-                name="name"
-                label="Nombre"
-              />
-              <InputControlContainer
-                name="location"
-                label="Lugar"
-              />
-              <InputControlContainer
-                name="posAllowed"
-                label="Permitir POS"
-              />
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button type="submit" disabled={isLoading}>Guardar</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </form>
-        </LoadingWrapper>
-      </FormProvider>
-    </DrawerContent>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)} noValidate className='h-full flex flex-col'>
+        <div className='px-4 flex flex-col gap-4 flex-1 justify-center'>
+          <InputControlContainer
+            name="name"
+            label="Nombre"
+          />
+          <InputControlContainer
+            name="location"
+            label="Lugar"
+          />
+          <InputControlContainer
+            name="posAllowed"
+            label="Permitir POS"
+          />
+          <Button type="submit" disabled={methods.formState.isLoading}>Guardar</Button>
+        </div>
+      </form>
+    </FormProvider>
   );
 };

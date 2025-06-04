@@ -9,4 +9,5 @@ export interface LoginResponse {
 
 export interface AuthParams {
   accessToken?: string;
+  workspaceId?: number;
 }
