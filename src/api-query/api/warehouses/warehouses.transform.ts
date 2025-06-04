@@ -6,7 +6,7 @@ export const warehouseTransform = (warehouse: any): Warehouse => {
     id: warehouse.id,
     location: warehouse.location,
     name: warehouse.name,
-    postAllowed: warehouse.posAllowed,
+    posAllowed: warehouse.posAllowed,
     createdAt: warehouse.createdAt,
     updatedAt: warehouse.updatedAt,
   };

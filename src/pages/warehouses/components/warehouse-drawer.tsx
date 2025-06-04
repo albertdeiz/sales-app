@@ -1,16 +1,9 @@
-import { Button } from '@/components/ui/button';
 import {
   Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
 } from '@/components/ui/drawer';
-import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 import type { Warehouse } from '@/interfaces/warehouse.interfaces';
 import type { ReactElement } from 'react';
+import { WarehouseForm } from './warehouse-form';
 
 interface WarehouseDrawerProps {
   data?: Warehouse;
@@ -21,22 +14,7 @@ interface WarehouseDrawerProps {
 export const WarehouseDrawer = ({ isOpen, data, onOpenChange }: WarehouseDrawerProps): ReactElement => {
   return (
     <Drawer open={isOpen} onOpenChange={onOpenChange} direction='right'>
-      <DrawerContent>
-        <LoadingWrapper isLoading={!data}>
-          <DrawerHeader>
-            <DrawerTitle>Almacén {data?.id}</DrawerTitle>
-            <DrawerDescription>{Object.entries(data ?? {}).map(([key, value]) => <div key={key}>
-              <strong>{key}:</strong> {value.toString()}
-            </div>)}</DrawerDescription>
-          </DrawerHeader>
-          <DrawerFooter>
-            <Button>Editar</Button>
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </LoadingWrapper>
-      </DrawerContent>
+      <WarehouseForm isLoading={false} onSubmit={console.log} data={data} />
     </Drawer>
   );
 };

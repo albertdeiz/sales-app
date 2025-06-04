@@ -14,7 +14,7 @@ export interface Warehouse {
   id: number;
   location: string;
   name: string;
-  postAllowed: boolean;
+  posAllowed: boolean;
   createdAt: string;
   updatedAt: string;
 };

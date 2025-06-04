@@ -24,9 +24,9 @@ export const columns: ColumnDef<Warehouse>[] = [
     header: 'Lugar',
   },
   {
-    accessorKey: 'postAllowed',
+    accessorKey: 'posAllowed',
     header: 'POS Permitido',
-    cell: ({ row }) => (row.original.postAllowed ? 'Sí' : 'No'),
+    cell: ({ row }) => (row.original.posAllowed ? 'Sí' : 'No'),
   },
   {
     id: 'actions',
