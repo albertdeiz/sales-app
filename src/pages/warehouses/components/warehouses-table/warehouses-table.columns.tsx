@@ -12,9 +12,14 @@ import {
 
 import type { Warehouse } from '@/interfaces/warehouse.interfaces';
 import type { ColumnDef } from '@tanstack/react-table';
-import { Link } from 'react-router';
 
-export const columns: ColumnDef<Warehouse>[] = [
+export type RowActionType = 'delete' | 'edit';
+
+export interface GetColumnsProps {
+  onRowActionClick?(type: RowActionType, item: Warehouse): void;
+}
+
+export const getColumns = ({ onRowActionClick }: GetColumnsProps): ColumnDef<Warehouse>[] => [
   {
     accessorKey: 'name',
     header: 'Nombre',
@@ -49,8 +54,15 @@ export const columns: ColumnDef<Warehouse>[] = [
               Copiar ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild><Link to={`/warehouses/${warehouse.id}`}>Ver almacén</Link></DropdownMenuItem>
-            <DropdownMenuItem className='text-red-500'>Eliminar almacén</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onRowActionClick?.('edit', warehouse)}>
+              Ver almacén
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className='text-red-500'
+              onClick={() => onRowActionClick?.('delete', warehouse)}
+            >
+              Eliminar almacén
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

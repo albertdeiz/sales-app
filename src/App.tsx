@@ -9,14 +9,14 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <LocalStorageProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <LocalStorageProvider>
         <AuthProvider>
           <Router />
           <Toaster />
         </AuthProvider>
-      </QueryClientProvider>
-    </LocalStorageProvider>
+      </LocalStorageProvider>
+    </QueryClientProvider>
   );
 };
 

@@ -17,7 +17,7 @@ export interface GetWarehouseParams extends AuthParams {
   id: number;
 }
 
-export const getWarehouses = async(params: ListWarehousesParams): Promise<Warehouse[]> => {
+export const getWarehouses = async (params: ListWarehousesParams): Promise<Warehouse[]> => {
   const { page, pageSize, search, sort, accessToken } = params ?? {};
 
   const queryParams: Record<string, string | number | undefined> = {
@@ -50,7 +50,7 @@ export const getWarehouses = async(params: ListWarehousesParams): Promise<Wareho
   }
 };
 
-export const getWarehouse = async({ id, accessToken }: GetWarehouseParams): Promise<Warehouse> => {
+export const getWarehouse = async ({ id, accessToken }: GetWarehouseParams): Promise<Warehouse> => {
   try {
     const { data: { warehouses } } = await axios.get(`/v1/sales/warehouse/${id}`, {
       headers: {
@@ -68,7 +68,7 @@ export const getWarehouse = async({ id, accessToken }: GetWarehouseParams): Prom
   }
 };
 
-export const updateWarehouse = async(params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
+export const updateWarehouse = async (params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
   const { id, accessToken, ...dataParams } = params;
 
   if (!id) {
@@ -92,7 +92,7 @@ export const updateWarehouse = async(params: Partial<Warehouse> & AuthParams): P
   }
 };
 
-export const createWarehouse = async(params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
+export const createWarehouse = async (params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
   const { accessToken, ...dataParams } = params;
 
   try {
@@ -103,6 +103,26 @@ export const createWarehouse = async(params: Partial<Warehouse> & AuthParams): P
     });
 
     return warehouseTransform(data);
+  } catch (error) {
+    if (isAxiosError(error)) {
+      throw ApiError.fromAxiosError(error);
+    }
+
+    throw new ApiError(500, 'An unexpected error occurred');
+  }
+};
+
+export const deleteWarehouse = async ({ id, accessToken }: { id: number; } & AuthParams): Promise<void> => {
+  if (!id) {
+    throw new ApiError(400, 'Warehouse ID is required for deletion');
+  }
+
+  try {
+    await axios.delete(`/v1/sales/warehouse/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   } catch (error) {
     if (isAxiosError(error)) {
       throw ApiError.fromAxiosError(error);

@@ -1,10 +1,20 @@
 import { DataTable } from '@/components/data/data-table';
-import { columns } from './warehouses-table.columns';
-
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
+import { getColumns } from './warehouses-table.columns';
 import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 
-export const WarehousesTable = ({ data, isLoading }: { data: Warehouse[], isLoading: boolean }) => {
+import type { Warehouse } from '@/interfaces/warehouse.interfaces';
+import type { RowActionType } from './warehouses-table.columns';
+import { useMemo } from 'react';
+
+export interface WarehousesTableProps {
+  data: Warehouse[];
+  isLoading: boolean;
+  onRowActionClick?: (type: RowActionType, item: Warehouse) => void;
+}
+
+export const WarehousesTable = ({ data, onRowActionClick, isLoading }: WarehousesTableProps) => {
+  const columns = useMemo(() => getColumns({ onRowActionClick }), [onRowActionClick]);
+
   return (
     <LoadingWrapper isLoading={isLoading}>
       <DataTable columns={columns} data={data} />
