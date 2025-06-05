@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { InputControlContainer } from '@/components/form/input/input-control.container';
+import { CheckboxControlContainer } from '@/components/form/checkbox/checkbox-control.container';
 import { Button } from '@/components/ui/button';
 
 import type { ReactElement } from 'react';
@@ -54,7 +55,7 @@ export const WarehouseForm = ({ data, onSubmit }: WarehouseFormProps): ReactElem
             name="location"
             label="Lugar"
           />
-          <InputControlContainer
+          <CheckboxControlContainer
             name="posAllowed"
             label="Permitir POS"
           />
