@@ -17,7 +17,9 @@ export interface GetWarehouseParams extends AuthParams {
   id: number;
 }
 
-export const getWarehouses = async (params: ListWarehousesParams): Promise<Warehouse[]> => {
+const WAREHOUSE_BASE_URL = '/v1/sales/warehouses';
+
+export const getWarehouses = async(params: ListWarehousesParams): Promise<Warehouse[]> => {
   const { page, pageSize, search, sort, accessToken } = params ?? {};
 
   const queryParams: Record<string, string | number | undefined> = {
@@ -33,7 +35,7 @@ export const getWarehouses = async (params: ListWarehousesParams): Promise<Wareh
     queryParams.sort = sort;
   }
   try {
-    const { data: { warehouses } } = await axios.get('/v1/sales/warehouse', {
+    const { data: { warehouses } } = await axios.get(WAREHOUSE_BASE_URL, {
       params: queryParams,
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -50,9 +52,9 @@ export const getWarehouses = async (params: ListWarehousesParams): Promise<Wareh
   }
 };
 
-export const getWarehouse = async ({ id, accessToken }: GetWarehouseParams): Promise<Warehouse> => {
+export const getWarehouse = async({ id, accessToken }: GetWarehouseParams): Promise<Warehouse> => {
   try {
-    const { data: { warehouses } } = await axios.get(`/v1/sales/warehouse/${id}`, {
+    const { data: { warehouses } } = await axios.get(`${WAREHOUSE_BASE_URL}/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -68,7 +70,7 @@ export const getWarehouse = async ({ id, accessToken }: GetWarehouseParams): Pro
   }
 };
 
-export const updateWarehouse = async (params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
+export const updateWarehouse = async(params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
   const { id, accessToken, ...dataParams } = params;
 
   if (!id) {
@@ -76,7 +78,7 @@ export const updateWarehouse = async (params: Partial<Warehouse> & AuthParams): 
   }
 
   try {
-    const { data } = await axios.patch(`/v1/sales/warehouse/update/${id}`, dataParams, {
+    const { data } = await axios.patch(`${WAREHOUSE_BASE_URL}/${id}`, dataParams, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -92,11 +94,11 @@ export const updateWarehouse = async (params: Partial<Warehouse> & AuthParams): 
   }
 };
 
-export const createWarehouse = async (params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
+export const createWarehouse = async(params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
   const { accessToken, ...dataParams } = params;
 
   try {
-    const { data } = await axios.post('/v1/sales/warehouse/create', dataParams, {
+    const { data } = await axios.post(WAREHOUSE_BASE_URL, dataParams, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -112,13 +114,13 @@ export const createWarehouse = async (params: Partial<Warehouse> & AuthParams): 
   }
 };
 
-export const deleteWarehouse = async ({ id, accessToken }: { id: number; } & AuthParams): Promise<void> => {
+export const deleteWarehouse = async({ id, accessToken }: { id: number; } & AuthParams): Promise<void> => {
   if (!id) {
     throw new ApiError(400, 'Warehouse ID is required for deletion');
   }
 
   try {
-    await axios.delete(`/v1/sales/warehouse/${id}`, {
+    await axios.delete(`${WAREHOUSE_BASE_URL}/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
