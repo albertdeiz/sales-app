@@ -9,7 +9,9 @@ import { GuestOnlyRoute, ProtectedRoute, PublicRoute } from './components/routes
 import { Dashboard, Home, Login } from './pages';
 import { UsersContainer } from './pages/settings/users';
 import { ProfileContainer } from './pages/settings/profile';
+import { WithoutWorkspaceOnlyRoute } from './components/routes/without-workspace-only-route';
 
+const SelectWorkspaceContainer = lazy(() => import('./pages/select-workspace'));
 const WarehousesContainer = lazy(() => import('./pages/warehouses'));
 
 const router = createBrowserRouter([
@@ -23,6 +25,15 @@ const router = createBrowserRouter([
       {
         path: '/contact',
         element: <div>Página de contacto</div>,
+      },
+    ],
+  },
+  {
+    element: <WithoutWorkspaceOnlyRoute />,
+    children: [
+      {
+        path: '/select-workspace',
+        element: <SelectWorkspaceContainer />,
       },
     ],
   },
