@@ -1,13 +1,15 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import type { ControllerProps } from 'react-hook-form';
-import type { FormControlProps } from '@/components/ui/form-control';
 import type { SelectProps } from '@/components/ui/select';
 
-export type SelectControlProps = Omit<FormControlProps, 'children'> & SelectProps &
-  Omit<ControllerProps, 'render'>;
+export type SelectControlProps = SelectProps &
+  Omit<ControllerProps, 'render'> & {
+    label?: string;
+    description?: ReactNode;
+  };
 
 /**
  * Component that implement a form control select wrapped on controller provided by react hook form
