@@ -25,6 +25,7 @@ export const useCurrentUserQuery = ({ accessToken }: AuthParams) => {
     queryKey: AUTH_KEY,
     queryFn: () => getCurrentUser({ accessToken }),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 0,
   });
 };
 
