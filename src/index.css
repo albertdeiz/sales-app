@@ -114,7 +114,12 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply flex min-h-screen bg-background text-foreground;
+  }
+
+  body>div {
+    @apply min-h-full flex-1;
   }
 }
