@@ -9,7 +9,7 @@ export type LabelProps = ComponentProps<typeof Root>;
 const Label = ({
   className,
   ...props
-}: ComponentProps<typeof Root>): ReactElement => {
+}: LabelProps): ReactElement => {
   return (
     <Root
       data-slot="label"
