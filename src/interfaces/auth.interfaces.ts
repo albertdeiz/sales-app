@@ -11,3 +11,7 @@ export interface AuthParams {
   accessToken?: string;
   workspaceId?: number;
 }
+
+export interface RefreshTokenParams extends AuthParams {
+  workspaceId: number;
+}
