@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { InputControlContainer } from '@/components/form/input/input-control.container';
 
-interface FormValues {
+export interface FormValues {
   email: string;
   workspaceId: string;
 }
@@ -19,8 +19,8 @@ interface SelectUserWorkspaceFormProps {
   userWorkspaces: UserWorkspace[];
   email: string;
   isLoading?: boolean;
-  onSubmit: (values: FormValues) => void;
-  onExit: () => void;
+  onSubmit(values: FormValues): void;
+  onExit?(): void;
 }
 
 const schema = zod.object({
@@ -56,7 +56,7 @@ export const SelectUserWorkspaceForm = ({ userWorkspaces, email, isLoading, onSu
           </CardContent>
           <CardFooter className="flex justify-between space-x-2">
             <Button type="submit" disabled={isLoading}>Entrar</Button>
-            <Button variant="ghost" type="button" onClick={onExit}>Salir</Button>
+            {onExit && <Button variant="ghost" type="button" onClick={onExit}>Salir</Button>}
           </CardFooter>
         </Card>
       </form>
