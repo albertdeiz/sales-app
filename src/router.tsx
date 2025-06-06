@@ -5,6 +5,7 @@ import {
 } from 'react-router';
 
 import { AppBaseLayout, RootLayout } from './components/layouts';
+import { GuestOnlyRoute, ProtectedRoute, PublicRoute } from './components/routes';
 import { Dashboard, Home, Login } from './pages';
 import { UsersContainer } from './pages/settings/users';
 import { ProfileContainer } from './pages/settings/profile';
@@ -13,33 +14,73 @@ const WarehousesContainer = lazy(() => import('./pages/warehouses'));
 
 const router = createBrowserRouter([
   {
-    path: '/login',
-    Component: RootLayout,
+    element: <PublicRoute />,
     children: [
-      { index: true, Component: Login },
+      {
+        path: '/about',
+        element: <div>Página pública sobre nosotros</div>,
+      },
+      {
+        path: '/contact',
+        element: <div>Página de contacto</div>,
+      },
     ],
   },
   {
-    path: '/',
-    Component: AppBaseLayout,
+    element: <GuestOnlyRoute />,
     children: [
-      { index: true, Component: Home },
-      { path: 'dashboard', Component: Dashboard },
       {
-        path: 'warehouses',
+        path: '/login',
+        element: <RootLayout />,
         children: [
-          { index: true, Component: WarehousesContainer },
-          { path: ':id', Component: WarehousesContainer },
+          { index: true, element: <Login /> },
         ],
       },
       {
-        path: 'settings',
+        path: '/register',
+        element: <RootLayout />,
         children: [
-          { path: 'users', Component: UsersContainer },
-          { path: 'profile', Component: ProfileContainer },
+          { index: true, element: <div>Página de registro</div> },
         ],
       },
     ],
+  },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: '/',
+        element: <AppBaseLayout />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: 'dashboard', element: <Dashboard /> },
+          {
+            path: 'warehouses',
+            children: [
+              {
+                index: true,
+                element: <WarehousesContainer />,
+              },
+              {
+                path: ':id',
+                element: <WarehousesContainer />,
+              },
+            ],
+          },
+          {
+            path: 'settings',
+            children: [
+              { path: 'users', element: <UsersContainer /> },
+              { path: 'profile', element: <ProfileContainer /> },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <div>404 - Página no encontrada</div>,
   },
 ]);
 

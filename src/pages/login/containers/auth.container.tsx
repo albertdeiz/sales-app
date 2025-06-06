@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import { useAuthContext } from '@/shared/hooks/use-auth-context';
 import { useAuthMutation } from '@/api-query/queries/auth.query';
@@ -12,7 +12,10 @@ import type { FormValues } from '../components/login-form';
 export const AuthContainer = (): ReactElement => {
   const { mutate, isPending } = useAuthMutation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuthContext();
+
+  const from = location.state?.from?.pathname || '/dashboard';
 
   const handleLogin = ({
     email,
@@ -25,7 +28,7 @@ export const AuthContainer = (): ReactElement => {
       onSuccess: (response) => {
         login(response);
         toast.success('Login exitoso');
-        navigate('/dashboard');
+        navigate(from, { replace: true });
       },
       onError: () => {
         toast.error('Error al iniciar sesión, verifique sus credenciales');
