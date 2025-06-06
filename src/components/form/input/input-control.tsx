@@ -1,12 +1,12 @@
-import { Controller } from 'react-hook-form';
+import { Input } from '@/components/ui/input';
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import type { InputProps } from '@/components/ui/input';
 import type { ControllerProps } from 'react-hook-form';
-import { FormControl, type FormControlProps } from '@/components/ui/form-control';
-import { Input, type InputProps } from '@/components/ui/input';
 
-export type InputControlProps = Omit<FormControlProps, 'children'> & InputProps &
-  Omit<ControllerProps, 'render'>;
+export type InputControlProps = InputProps &
+  Omit<ControllerProps, 'render'> & { description?: ReactNode; label?: string };
 
 /**
  * Component that implement a form control input wrapped on controller provided by react hook form
@@ -14,27 +14,29 @@ export type InputControlProps = Omit<FormControlProps, 'children'> & InputProps 
 export const InputControl = ({
   name,
   label,
-  defaultValue = '',
   control,
+  description,
   ...rest
 }: InputControlProps): ReactElement => (
-  <Controller
-    name={name}
+
+  <FormField
     control={control}
-    defaultValue={defaultValue}
-    render={({ field: { ref, ...field }, fieldState: { error } }): ReactElement => (
-      <FormControl
-        label={label}
-        error={error?.message}
-        htmlFor={name}
-      >
-        <Input
-          id={name}
-          {...field}
-          ref={ref}
-          {...rest}
-        />
-      </FormControl>
+    name={name}
+    render={({ field }) => (
+      <FormItem>
+        {label && <FormLabel>{label}</FormLabel>}
+        <FormControl>
+          <Input
+            id={name}
+            {...field}
+            {...rest}
+          />
+        </FormControl>
+        {description && <FormDescription>
+          {description}
+        </FormDescription>}
+        <FormMessage />
+      </FormItem>
     )}
   />
 );
