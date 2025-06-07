@@ -1,5 +1,4 @@
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router';
 
 import { useAuthMutation } from '@/api-query/queries/auth.query';
 
@@ -10,7 +9,6 @@ import type { FormValues } from '../components/login-form';
 
 export const AuthContainer = (): ReactElement => {
   const { mutate, isPending } = useAuthMutation();
-  const navigate = useNavigate();
 
   const handleLogin = ({
     email,
@@ -22,7 +20,6 @@ export const AuthContainer = (): ReactElement => {
     }, {
       onSuccess: () => {
         toast.success('Login exitoso');
-        navigate('/select-workspace');
       },
       onError: () => {
         toast.error('Error al iniciar sesión, verifique sus credenciales');
