@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { LocalStorageContext } from '../contexts/local-storage.context';
 
 import type { ReactNode } from 'react';
@@ -8,20 +8,16 @@ interface LocalStorageProviderProps {
   children: ReactNode;
 }
 
+// Clave única para almacenar todos los datos
+const STORAGE_KEY = 'sales-app-storage';
+
 const loadInitialState = (): Partial<LocalStorageSchema> => {
   const initialState: Partial<LocalStorageSchema> = {};
 
   try {
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-
-      if (key) {
-        const item = localStorage.getItem(key);
-
-        if (item) {
-          initialState[key as keyof LocalStorageSchema] = JSON.parse(item);
-        }
-      }
+    const storedData = localStorage.getItem(STORAGE_KEY);
+    if (storedData) {
+      return JSON.parse(storedData);
     }
   } catch (error) {
     console.error('Error al inicializar el estado desde localStorage:', error);
@@ -31,61 +27,50 @@ const loadInitialState = (): Partial<LocalStorageSchema> => {
 };
 
 export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
-  const [storageState, setStorageState] = useState<Partial<LocalStorageSchema>>(loadInitialState());
+  const [storageState, setStorageState] = useState<Partial<LocalStorageSchema>>(loadInitialState);
 
   const setItem = useCallback(<K extends keyof LocalStorageSchema>(
     key: K,
     value: LocalStorageSchema[K],
   ): void => {
-    try {
-      localStorage.setItem(String(key), JSON.stringify(value));
+    setStorageState((prevState) => {
+      const newState = { ...prevState, [key]: value };
 
-      setStorageState(prev => ({
-        ...prev,
-        [key]: value,
-      }));
-    } catch (error) {
-      console.error(`Error al guardar ${String(key)} en localStorage:`, error);
-    }
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
+      } catch (error) {
+        console.error('Error al guardar en localStorage:', error);
+      }
+
+      return newState;
+    });
   }, []);
 
   const getItem = useCallback(<K extends keyof LocalStorageSchema>(
     key: K,
-    defaultValue?: LocalStorageSchema[K],
   ): LocalStorageSchema[K] | undefined => {
-    try {
-      const item = localStorage.getItem(String(key));
+    return storageState[key];
+  }, [storageState]);
 
-      if (item) {
-        return JSON.parse(item);
+  const removeItem = useCallback(<K extends keyof LocalStorageSchema>(key: K): void => {
+    setStorageState((prevState) => {
+      const newState = { ...prevState };
+      delete newState[key];
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
+      } catch (error) {
+        console.error('Error al guardar en localStorage después de eliminar:', error);
       }
-      return defaultValue;
-    } catch (error) {
-      console.error(`Error al recuperar ${String(key)} de localStorage:`, error);
 
-      return defaultValue;
-    }
-  }, []);
-
-  const removeItem = useCallback((key: keyof LocalStorageSchema): void => {
-    try {
-      localStorage.removeItem(String(key));
-
-      setStorageState(prev => {
-        const updated = { ...prev };
-        delete updated[key];
-        return updated;
-      });
-    } catch (error) {
-      console.error(`Error al eliminar ${String(key)} de localStorage:`, error);
-    }
+      return newState;
+    });
   }, []);
 
   const clear = useCallback((): void => {
+    setStorageState({});
     try {
-      localStorage.clear();
-
-      setStorageState({});
+      localStorage.removeItem(STORAGE_KEY);
     } catch (error) {
       console.error('Error al limpiar localStorage:', error);
     }
@@ -98,29 +83,6 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
     clear,
     state: storageState,
   }), [setItem, getItem, removeItem, clear, storageState]);
-
-  useEffect(() => {
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.storageArea === localStorage && event.key) {
-        if (event.newValue === null) {
-          setStorageState(prev => {
-            const updated = { ...prev };
-            delete updated[event.key as keyof LocalStorageSchema];
-            return updated;
-          });
-        } else if (event.newValue) {
-          setStorageState(prev => ({
-            ...prev,
-            [event.key as keyof LocalStorageSchema]: JSON.parse(event.newValue!),
-          }));
-        }
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <LocalStorageContext.Provider value={contextValue}>
