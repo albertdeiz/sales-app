@@ -13,7 +13,7 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { setItem, removeItem, state: { accessToken } } = useLocalStorageContext();
-  const { data: currentUser, isLoading = true, isError } = useCurrentUserQuery({ accessToken });
+  const { data: currentUser, isLoading, isError } = useCurrentUserQuery({ accessToken });
 
   const login = useCallback(({ accessToken }: LoginResponse) => {
     setItem('accessToken', accessToken);

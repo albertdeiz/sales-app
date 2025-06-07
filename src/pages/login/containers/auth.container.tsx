@@ -15,7 +15,7 @@ export const AuthContainer = (): ReactElement => {
   const location = useLocation();
   const { login } = useAuthContext();
 
-  const from = location.state?.from?.pathname || '/dashboard';
+  const from = location.state?.from?.pathname || '/select-workspace';
 
   const handleLogin = ({
     email,
