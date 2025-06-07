@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { LocalStorageContext } from '../contexts/local-storage.context';
 
 import type { ReactNode } from 'react';
@@ -8,80 +8,37 @@ interface LocalStorageProviderProps {
   children: ReactNode;
 }
 
+const loadInitialState = (): Partial<LocalStorageSchema> => {
+  const initialState: Partial<LocalStorageSchema> = {};
+
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+
+      if (key) {
+        const item = localStorage.getItem(key);
+
+        if (item) {
+          initialState[key as keyof LocalStorageSchema] = JSON.parse(item);
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error al inicializar el estado desde localStorage:', error);
+  }
+
+  return initialState;
+};
+
 export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
-  const [storageState, setStorageState] = useState<Partial<LocalStorageSchema>>({});
+  const [storageState, setStorageState] = useState<Partial<LocalStorageSchema>>(loadInitialState());
 
-  const encode = useCallback((value: unknown): string => {
-    const stringValue = JSON.stringify(value);
-
-    return btoa(encodeURIComponent(stringValue));
-  }, []);
-
-  const decode = useCallback(<T, >(encodedValue: string): T => {
-    try {
-      const decodedString = decodeURIComponent(atob(encodedValue));
-
-      return JSON.parse(decodedString) as T;
-    } catch (error) {
-      console.error('Error decodificando valor de localStorage:', error);
-
-      return {} as T;
-    }
-  }, []);
-
-  useEffect(() => {
-    const initialState: Partial<LocalStorageSchema> = {};
-
-    try {
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-
-        if (key) {
-          const item = localStorage.getItem(key);
-
-          if (item) {
-            initialState[key as keyof LocalStorageSchema] = decode(item);
-          }
-        }
-      }
-    } catch (error) {
-      console.error('Error al inicializar el estado desde localStorage:', error);
-    }
-
-    setStorageState(initialState);
-  }, [decode]);
-
-  useEffect(() => {
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.storageArea === localStorage && event.key) {
-        if (event.newValue === null) {
-          setStorageState(prev => {
-            const updated = { ...prev };
-            delete updated[event.key as keyof LocalStorageSchema];
-            return updated;
-          });
-        } else if (event.newValue) {
-          setStorageState(prev => ({
-            ...prev,
-            [event.key as keyof LocalStorageSchema]: decode(event.newValue!),
-          }));
-        }
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [decode]);
-
-  // Funciones para manejar localStorage con tipos específicos
   const setItem = useCallback(<K extends keyof LocalStorageSchema>(
     key: K,
     value: LocalStorageSchema[K],
   ): void => {
     try {
-      const encodedValue = encode(value);
-      localStorage.setItem(String(key), encodedValue);
+      localStorage.setItem(String(key), JSON.stringify(value));
 
       setStorageState(prev => ({
         ...prev,
@@ -90,7 +47,7 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
     } catch (error) {
       console.error(`Error al guardar ${String(key)} en localStorage:`, error);
     }
-  }, [encode]);
+  }, []);
 
   const getItem = useCallback(<K extends keyof LocalStorageSchema>(
     key: K,
@@ -100,7 +57,7 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
       const item = localStorage.getItem(String(key));
 
       if (item) {
-        return decode<LocalStorageSchema[K]>(item);
+        return JSON.parse(item);
       }
       return defaultValue;
     } catch (error) {
@@ -108,7 +65,7 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
 
       return defaultValue;
     }
-  }, [decode]);
+  }, []);
 
   const removeItem = useCallback((key: keyof LocalStorageSchema): void => {
     try {
@@ -141,6 +98,29 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
     clear,
     state: storageState,
   }), [setItem, getItem, removeItem, clear, storageState]);
+
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.storageArea === localStorage && event.key) {
+        if (event.newValue === null) {
+          setStorageState(prev => {
+            const updated = { ...prev };
+            delete updated[event.key as keyof LocalStorageSchema];
+            return updated;
+          });
+        } else if (event.newValue) {
+          setStorageState(prev => ({
+            ...prev,
+            [event.key as keyof LocalStorageSchema]: JSON.parse(event.newValue!),
+          }));
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   return (
     <LocalStorageContext.Provider value={contextValue}>
