@@ -37,7 +37,7 @@ export const LoginForm = ({ isLoading, onLogin }: LoginFormProps): ReactElement 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onLogin)} noValidate>
-        <Card className="w-full w-sm mx-auto mt-10">
+        <Card className="w-sm">
           <CardHeader>
             <CardTitle className="text-xl">Iniciar sesión</CardTitle>
           </CardHeader>
