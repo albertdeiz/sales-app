@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { AuthContext } from '@/shared/contexts/auth.context';
 import { useLocalStorageContext } from '@/shared/hooks/use-local-storage-context';
 import { useCurrentUserQuery } from '@/api-query/queries/auth.query';
+import { AUTH_KEY } from '@/api-query/keys/auth.key';
 
 import type { LoginResponse } from '@/interfaces/auth.interfaces';
 import type { ReactNode } from 'react';
-import { AUTH_KEY } from '@/api-query/keys/auth.key';
-import { useQueryClient } from '@tanstack/react-query';
 
 interface AuthProviderProps {
   children: ReactNode;
