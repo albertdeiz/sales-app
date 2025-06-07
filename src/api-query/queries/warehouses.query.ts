@@ -56,7 +56,7 @@ export const useCreateWarehouseMutation = (): UseMutationResult<Warehouse, ApiEr
   const params = {};
 
   return useMutation<Warehouse, ApiError, Partial<Warehouse>>({
-    mutationFn: (warehouse) => createWarehouse({ ...warehouse, accessToken, workspaceId: 1 }),
+    mutationFn: (warehouse) => createWarehouse({ ...warehouse, accessToken }),
     onSuccess: (data) => {
       queryClient.setQueryData<Warehouse[]>([...WAREHOUSE_KEY, params], (oldData) => {
         if (!oldData) return [data];
