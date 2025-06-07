@@ -15,7 +15,7 @@ export const useAuthMutation = (): UseMutationResult<LoginResponse, Error, Login
     mutationFn: login,
     onSuccess: (response) => {
       loginUser(response);
-      queryClient.invalidateQueries({ queryKey: AUTH_KEY });
+      // queryClient.invalidateQueries({ queryKey: AUTH_KEY });
     },
   });
 };
@@ -24,7 +24,6 @@ export const useCurrentUserQuery = ({ accessToken }: AuthParams) => {
   return useQuery({
     queryKey: AUTH_KEY,
     queryFn: () => getCurrentUser({ accessToken }),
-    staleTime: 1000 * 60 * 5, // 5 minutes
     retry: 0,
   });
 };
@@ -37,7 +36,7 @@ export const useRefreshTokenMutation = (): UseMutationResult<LoginResponse, Erro
     mutationFn: (workspaceId: number) => refreshToken({ workspaceId, accessToken }),
     onSuccess: (response) => {
       loginUser(response);
-      queryClient.invalidateQueries({ queryKey: AUTH_KEY });
+      // queryClient.invalidateQueries({ queryKey: AUTH_KEY });
     },
   });
 };
