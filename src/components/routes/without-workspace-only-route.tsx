@@ -15,5 +15,9 @@ export const WithoutWorkspaceOnlyRoute = () => {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
   return <Outlet />;
 };
