@@ -33,7 +33,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/select-workspace',
-        element: <SelectWorkspaceContainer />,
+        element: <RootLayout />,
+        children: [
+          { index: true, element: <SelectWorkspaceContainer /> },
+        ],
       },
     ],
   },
