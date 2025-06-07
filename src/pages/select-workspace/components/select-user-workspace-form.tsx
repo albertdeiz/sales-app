@@ -41,7 +41,7 @@ export const SelectUserWorkspaceForm = ({ userWorkspaces, email, isLoading, onSu
       <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
         <Card className="w-sm">
           <CardHeader>
-            <CardTitle>Selecciona tu espacio de trabajo</CardTitle>
+            <CardTitle className="text-xl">Selecciona tu espacio de trabajo</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <InputControlContainer disabled label="correo electrónico" name="email" />
