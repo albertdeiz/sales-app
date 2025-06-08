@@ -13,6 +13,7 @@ import { WithoutWorkspaceOnlyRoute } from './components/routes/without-workspace
 
 const SelectWorkspaceContainer = lazy(() => import('./pages/select-workspace'));
 const WarehousesContainer = lazy(() => import('./pages/warehouses'));
+const ProductsContainer = lazy(() => import('./pages/products'));
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,19 @@ const router = createBrowserRouter([
               {
                 path: ':id',
                 element: <WarehousesContainer />,
+              },
+            ],
+          },
+          {
+            path: 'products',
+            children: [
+              {
+                index: true,
+                element: <ProductsContainer />,
+              },
+              {
+                path: ':id',
+                element: <ProductsContainer />,
               },
             ],
           },
