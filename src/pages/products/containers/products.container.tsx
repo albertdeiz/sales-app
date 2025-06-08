@@ -84,8 +84,8 @@ export const ProductsContainer = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Almacenes</CardTitle>
-        <CardDescription>Gestión de almacenes</CardDescription>
+        <CardTitle>Productos</CardTitle>
+        <CardDescription>Gestión de productos</CardDescription>
         <CardAction>
           <Button onClick={handleClickNew}>
             <PlusCircle />
