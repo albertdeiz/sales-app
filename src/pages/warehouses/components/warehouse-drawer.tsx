@@ -6,13 +6,13 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
+import { Button } from '@/components/ui/button';
+import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 import { WarehouseForm } from './warehouse-form';
 
 import type { Warehouse } from '@/interfaces/warehouse.interfaces';
 import type { ReactElement } from 'react';
 import type { FormValues } from './warehouse-form';
-import { Button } from '@/components/ui/button';
-import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 
 interface WarehouseDrawerProps {
   data?: Warehouse;
@@ -30,7 +30,6 @@ export const WarehouseDrawer = ({ isOpen, data, isLoading, onOpenChange, onSaveD
           <DrawerTitle>Almacén #{data?.id}</DrawerTitle>
         </DrawerHeader>
         <LoadingWrapper isLoading={isLoading}>
-          {/* <ProfileForm className="px-4" /> */}
           <WarehouseForm onSubmit={onSaveData} data={data} />
         </LoadingWrapper>
         <DrawerFooter className="pt-2">
@@ -39,7 +38,6 @@ export const WarehouseDrawer = ({ isOpen, data, isLoading, onOpenChange, onSaveD
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
-
     </Drawer>
   );
 };
