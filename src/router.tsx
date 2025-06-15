@@ -14,6 +14,8 @@ import { WithoutWorkspaceOnlyRoute } from './components/routes/without-workspace
 const SelectWorkspaceContainer = lazy(() => import('./pages/select-workspace'));
 const WarehousesContainer = lazy(() => import('./pages/warehouses'));
 const ProductsContainer = lazy(() => import('./pages/products'));
+const ReceptionsContainer = lazy(() => import('./pages/receptions'));
+const ReceptionFormContainer = lazy(() => import('./pages/receptions/reception-form'));
 
 const router = createBrowserRouter([
   {
@@ -78,19 +80,35 @@ const router = createBrowserRouter([
             element: <ProductsContainer />,
           },
           {
+            path: 'receptions',
+            children: [
+              { index: true, element: <ReceptionsContainer /> },
+              { path: ':action/:id?', element: <ReceptionFormContainer /> },
+            ],
+          },
+          {
             path: 'settings',
             children: [
               { path: 'users', element: <UsersContainer /> },
-              { path: 'profile', element: <ProfileContainer /> },
+              {
+                element: <ReceptionsContainer />,
+              },
+              {
+                path: 'settings',
+                children: [
+                  { path: 'users', element: <UsersContainer /> },
+                  { path: 'profile', element: <ProfileContainer /> },
+                ],
+              },
             ],
           },
         ],
       },
+      {
+        path: '*',
+        element: <div>404 - Página no encontrada</div>,
+      },
     ],
-  },
-  {
-    path: '*',
-    element: <div>404 - Página no encontrada</div>,
   },
 ]);
 

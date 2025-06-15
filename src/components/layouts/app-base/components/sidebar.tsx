@@ -1,4 +1,4 @@
-import { Home, Calendar, Warehouse, Users, Store } from 'lucide-react';
+import { Home, Calendar, Warehouse, Users, Store, FileInput } from 'lucide-react';
 import { useLocation, Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 const navItems = [
   { label: 'Dashboard', icon: Home, path: '/dashboard' },
   { label: 'Almacenes', icon: Warehouse, path: '/warehouses' },
+  { label: 'Recepción', icon: FileInput, path: '/receptions' },
   { label: 'Productos', icon: Store, path: '/products' },
   { label: 'Usuarios', icon: Users, path: '/settings/users' },
 ];
