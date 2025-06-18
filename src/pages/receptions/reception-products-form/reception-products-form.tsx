@@ -6,10 +6,12 @@ import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SearchSelector } from "@/components/ui/search-selector";
 import { LoadingWrapper } from "@/components/ui/loading-wrapper";
+import { SelectControlContainer } from "@/components/form/select/select-control.container";
 import { ProductsListFormPart } from "./products-list-form-part";
 
 import type { Product } from "@/interfaces/product.interfaces";
 import type { ReceptionProductFormValues } from "./products-list-form-part";
+import type { SelectOption } from "@/components/ui/select";
 
 export interface ReceptionProductsFormValues {
   warehouseId: string;
@@ -20,6 +22,9 @@ export interface ReceptionProductsFormValues {
 
 interface ReceptionProductsFormProps {
   products: Product[];
+  responsibleOptions: SelectOption[];
+  warehouseOptions: SelectOption[];
+  vendorOptions: SelectOption[];
   isFetching: boolean;
   isSubmitting: boolean;
   onSubmit(values: ReceptionProductsFormValues): void;
@@ -44,6 +49,9 @@ const schema = z.object({
 
 export const ReceptionProductsForm = ({
   products,
+  responsibleOptions,
+  vendorOptions,
+  warehouseOptions,
   isFetching,
   isSubmitting,
   onSubmit,
@@ -80,9 +88,9 @@ export const ReceptionProductsForm = ({
       <form className="flex h-full gap-4" onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="w-1/4 flex flex-col gap-4">
           <h1 className="text-1xl font-bold">Nueva recepción</h1>
-          <p className="text-muted-foreground">
-            Aquí puedes crear una nueva recepción de productos.
-          </p>
+          <SelectControlContainer label="Almacén" name="warehouseId" options={warehouseOptions} />
+          <SelectControlContainer label="Proveedor" name="vendorId" options={vendorOptions} />
+          <SelectControlContainer label="Responsable" name="userId" options={responsibleOptions} />
           <Button type='submit' disabled={isSubmitting}>Guardar</Button>
         </div>
         <div className="w-3/4 flex-1 h-full flex flex-col">
