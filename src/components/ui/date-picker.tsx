@@ -17,12 +17,14 @@ import type { RefCallBack } from "react-hook-form";
 
 export interface DatePickerProps {
   value?: Date;
+  className?: string;
+  disabled?: boolean;
   ref?: RefCallBack;
   onChange?(date: Date | undefined): void;
   onBlur?(): void;
 }
 
-export const DatePicker = ({ value, ref, onChange, onBlur }: DatePickerProps) => {
+export const DatePicker = ({ value, disabled, ref, onChange, onBlur }: DatePickerProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -31,6 +33,7 @@ export const DatePicker = ({ value, ref, onChange, onBlur }: DatePickerProps) =>
             ref={ref}
             variant={"outline"}
             onBlur={onBlur}
+            disabled={disabled}
             className={cn(
               "w-full pl-3 text-left font-normal",
               !value && "text-muted-foreground",
@@ -38,11 +41,11 @@ export const DatePicker = ({ value, ref, onChange, onBlur }: DatePickerProps) =>
           >
             {value
               ? (
-                  format(value, "PPP", { locale: es })
-                )
+                format(value, "PPP", { locale: es })
+              )
               : (
                 <span>Elige una fecha</span>
-                )}
+              )}
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </FormControl>

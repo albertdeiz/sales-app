@@ -1,14 +1,15 @@
-import { Controller } from "react-hook-form";
-import { FormControl } from "@/components/ui/form-control";
 import { DatePicker } from "@/components/ui/date-picker";
+import { FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import type { ControllerProps } from "react-hook-form";
-import type { FormControlProps } from "@/components/ui/form-control";
 import type { DatePickerProps } from "@/components/ui/date-picker";
 
-export type DatePickerControlProps = Omit<FormControlProps, "children"> & DatePickerProps &
-  Omit<ControllerProps, "render">;
+export type DatePickerControlProps = DatePickerProps &
+  Omit<ControllerProps, "render"> & {
+    label?: string;
+    description?: ReactNode;
+  };
 
 /**
  * DatePickerControl is a wrapper around the DatePicker component that integrates it with react-hook-form.
@@ -18,28 +19,28 @@ export type DatePickerControlProps = Omit<FormControlProps, "children"> & DatePi
 export const DatePickerControl = ({
   name,
   label,
-  defaultValue = "",
   control,
+  className,
+  description,
   ...rest
 }: DatePickerControlProps): ReactElement => (
-  <Controller
-    name={name}
+  <FormField
     control={control}
-    defaultValue={defaultValue}
-    render={({ field: { ref, ...field }, fieldState: { error } }): ReactElement => (
-      <FormControl
-        label={label}
-        error={error?.message}
-        htmlFor={name}
-      >
+    name={name}
+    render={({ field: { onBlur, onChange, ref, value, disabled } }) => (
+      <FormItem className={className}>
+        {label && <FormLabel>{label}</FormLabel>}
         <DatePicker
-          value={field.value}
-          {...rest}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
+          value={value}
+          disabled={disabled}
+          onChange={onChange}
+          onBlur={onBlur}
           ref={ref}
+          {...rest}
         />
-      </FormControl>
+        {description && <FormDescription>{description}</FormDescription>}
+        <FormMessage />
+      </FormItem>
     )}
   />
 );
