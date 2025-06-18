@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { SearchableList, type ItemObject } from "./searchable-list";
 
 interface SearchSelectorProps<T> {
+  placeholder?: string;
   options: T[];
   onChange?: (value: T) => void;
 }
 
 export const SearchSelector = <T extends ItemObject>({
+  placeholder = "Selecciona una opción",
   options = [],
   onChange,
 }: SearchSelectorProps<T>) => {
@@ -25,7 +27,7 @@ export const SearchSelector = <T extends ItemObject>({
           className="w-full justify-between"
           size="lg"
         >
-          Selecciona una opción
+          {placeholder}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
