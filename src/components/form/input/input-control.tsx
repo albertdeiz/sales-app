@@ -30,6 +30,13 @@ export const InputControl = ({
             id={name}
             {...field}
             {...rest}
+            onChange={(e) => {
+              if (rest.type === 'number') {
+                field.onChange(Number(e.target.value));
+              } else {
+                field.onChange(e.target.value);
+              }
+            }}
           />
         </FormControl>
         {description && <FormDescription>
