@@ -1,18 +1,14 @@
 import { Outlet } from "react-router";
 
-import { Sidebar } from "./components/sidebar";
-import { TopbarContainer } from "./containers/topbar.container";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "./components/app-sidebar";
 
-export const AppBaseLayout = () => {
-  return (
-    <div className="flex h-screen bg-muted">
-      <Sidebar />
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <TopbarContainer />
-        <main className="p-6 overflow-auto flex-1">
-          <Outlet />
-        </main>
-      </div>
-    </div>
-  );
-};
+export const AppBaseLayout = () => (
+  <SidebarProvider >
+    <AppSidebar />
+    <main>
+      <SidebarTrigger />
+      <Outlet />
+    </main>
+  </SidebarProvider>
+);
