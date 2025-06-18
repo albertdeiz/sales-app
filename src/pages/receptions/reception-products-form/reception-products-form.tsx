@@ -70,7 +70,7 @@ export const ReceptionProductsForm = ({ products, isFetching, isSubmitting, onSu
           </LoadingWrapper>
         </div>
 
-        <div className='mt-2'>
+        <div>
           <ProductsListFormPart control={methods.control} values={methods.watch('receptionProducts')} />
 
           <Button type='submit' disabled={isSubmitting}>Guardar</Button>
