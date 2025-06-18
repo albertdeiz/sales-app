@@ -59,35 +59,35 @@ export const ProductsListFormPart = ({ control, values }: ProductsListFormPartPr
   }, 0));
 
   return (
-    <Table className='bg-white'>
-      <TableHeader>
+    <Table className="overflow-auto bg-white">
+      <TableHeader className="sticky top-0 z-10 bg-white">
         <TableRow>
-          <TableHead className='text-center'>Linea</TableHead>
-          <TableHead className='text-center'>Producto</TableHead>
-          <TableHead className='text-center'>Costo</TableHead>
-          <TableHead className='text-center'>Cantidad</TableHead>
-          <TableHead className='text-center'>UM</TableHead>
-          <TableHead className='text-center'>Lote</TableHead>
-          <TableHead className='text-center'>Vencimiento</TableHead>
-          <TableHead className='text-center'>Subtotal</TableHead>
+          <TableHead className="text-center">Linea</TableHead>
+          <TableHead className="text-center">Producto</TableHead>
+          <TableHead className="text-center">Costo</TableHead>
+          <TableHead className="text-center">Cantidad</TableHead>
+          <TableHead className="text-center">UM</TableHead>
+          <TableHead className="text-center">Lote</TableHead>
+          <TableHead className="text-center">Vencimiento</TableHead>
+          <TableHead className="text-center">Subtotal</TableHead>
           <TableHead></TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="relative">
         {fields.map((field, index) => (
           <TableRow key={field.id}>
-            <TableCell><p className='text-xl px-5'>{index + 1}</p></TableCell>
+            <TableCell><p className="text-xl px-5">{index + 1}</p></TableCell>
             <TableCell>{field.product.name}</TableCell>
             <TableCell>
               <InputControlContainer
                 name={`receptionProducts.${index}.cost`}
-                type='number'
+                type="number"
               />
             </TableCell>
             <TableCell>
               <InputControlContainer
                 name={`receptionProducts.${index}.quantity`}
-                type='number'
+                type="number"
               />
             </TableCell>
             <TableCell>
@@ -115,10 +115,10 @@ export const ProductsListFormPart = ({ control, values }: ProductsListFormPartPr
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
+      <TableFooter className="sticky bottom-0 z-10 bg-white">
         <TableRow>
-          <TableCell colSpan={7} className='text-left text-xl'>Total</TableCell>
-          <TableCell className="text-center text-xl">{total}</TableCell>
+          <TableCell colSpan={7} className="text-left text-xl">Total</TableCell>
+          <TableCell colSpan={2} className="text-center text-xl">{total}</TableCell>
         </TableRow>
       </TableFooter>
     </Table>

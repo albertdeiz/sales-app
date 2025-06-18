@@ -12,6 +12,9 @@ import type { Product } from "@/interfaces/product.interfaces";
 import type { ReceptionProductFormValues } from "./products-list-form-part";
 
 export interface ReceptionProductsFormValues {
+  warehouseId: string;
+  vendorId: string
+  userId: string;
   receptionProducts: ReceptionProductFormValues[];
 }
 
@@ -23,6 +26,9 @@ interface ReceptionProductsFormProps {
 }
 
 const schema = z.object({
+  warehouseId: z.string().min(1, "El almacén es obligatorio"),
+  vendorId: z.string().min(1, "El proveedor es obligatorio"),
+  userId: z.string().min(1, "El tipo de documento es obligatorio"),
   receptionProducts: z.array(
     z.object({
       productId: z.number().min(1, "El ID del producto es obligatorio"),
@@ -45,6 +51,9 @@ export const ReceptionProductsForm = ({
   const methods = useForm<ReceptionProductsFormValues>({
     resolver: zodResolver(schema),
     values: {
+      warehouseId: "",
+      vendorId: "",
+      userId: "",
       receptionProducts: [],
     },
   });
@@ -68,20 +77,27 @@ export const ReceptionProductsForm = ({
 
   return (
     <Form {...methods}>
-      <form className='relative' onSubmit={methods.handleSubmit(onSubmit)}>
-        <div className='sticky top-0 z-10 bg-white p-4 border-b'>
-          <LoadingWrapper isLoading={isFetching}>
-            <SearchSelector options={products} onChange={onAddProduct} />
-          </LoadingWrapper>
-        </div>
-
-        <div>
-          <ProductsListFormPart
-            control={methods.control}
-            values={methods.watch("receptionProducts")}
-          />
-
+      <form className="flex h-full gap-4" onSubmit={methods.handleSubmit(onSubmit)}>
+        <div className="w-1/4 flex flex-col gap-4">
+          <h1 className="text-1xl font-bold">Nueva recepción</h1>
+          <p className="text-muted-foreground">
+            Aquí puedes crear una nueva recepción de productos.
+          </p>
           <Button type='submit' disabled={isSubmitting}>Guardar</Button>
+        </div>
+        <div className="w-3/4 flex-1 h-full flex flex-col">
+          <div className='bg-white p-4 border-b'>
+            <LoadingWrapper isLoading={isFetching}>
+              <SearchSelector options={products} onChange={onAddProduct} />
+            </LoadingWrapper>
+          </div>
+
+          <div className="max-h-full flex-1 overflow-hidden">
+            <ProductsListFormPart
+              control={methods.control}
+              values={methods.watch("receptionProducts")}
+            />
+          </div>
         </div>
       </form>
     </Form>
