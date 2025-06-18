@@ -15,7 +15,7 @@ const SelectWorkspaceContainer = lazy(() => import("./pages/select-workspace"));
 const WarehousesContainer = lazy(() => import("./pages/warehouses"));
 const ProductsContainer = lazy(() => import("./pages/products"));
 const ReceptionsContainer = lazy(() => import("./pages/receptions"));
-const ReceptionFormContainer = lazy(() => import("./pages/receptions/reception-form"));
+const ReceptionFormContainer = lazy(() => import("./pages/receptions/main-form"));
 
 const router = createBrowserRouter([
   {

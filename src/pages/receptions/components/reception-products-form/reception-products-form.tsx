@@ -41,7 +41,7 @@ const schema = z.object({
       quantity: z.number().min(1, "La cantidad debe ser mayor a 0"),
       measurementUnitId: z.string().min(1, "La unidad de medida es obligatoria"),
       batch: z.string().min(1, "El lote es obligatorio"),
-      expirationDate: z.date().optional(),
+      expirationDate: z.date(),
       elaborationDate: z.date().optional(),
     }),
   ),
@@ -77,7 +77,7 @@ export const ReceptionProductsForm = ({
         quantity: 1,
         measurementUnitId: "",
         batch: "",
-        expirationDate: undefined,
+        expirationDate: new Date(),
         elaborationDate: undefined,
       },
     ]);

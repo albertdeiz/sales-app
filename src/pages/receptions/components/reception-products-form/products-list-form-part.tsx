@@ -28,7 +28,7 @@ export interface ReceptionProductFormValues {
   quantity: number;
   measurementUnitId: string;
   batch: string;
-  expirationDate?: Date;
+  expirationDate: Date;
   elaborationDate?: Date;
 }
 
