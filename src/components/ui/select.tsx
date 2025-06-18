@@ -17,6 +17,7 @@ export interface SelectProps
   size?: "sm" | "default";
   options: SelectOption[];
   description?: React.ReactNode;
+  className?: string;
 }
 
 function Select({

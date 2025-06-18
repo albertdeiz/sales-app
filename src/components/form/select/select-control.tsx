@@ -36,13 +36,14 @@ export const SelectControl = ({
   size,
   options,
   description,
+  className,
   ...rest
 }: SelectControlProps): ReactElement => (
   <FormField
     control={control}
     name={name}
     render={({ field: { name, onBlur, onChange, ref, value, disabled } }) => (
-      <FormItem>
+      <FormItem className={className}>
         {label && <FormLabel>{label}</FormLabel>}
         <Select
           onValueChange={onChange}
