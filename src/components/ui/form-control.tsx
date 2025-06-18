@@ -9,15 +9,20 @@ export interface FormControlProps extends LabelProps {
   children: ReactNode;
 }
 
-export const FormControl = ({ children, label, error, ...labelProps }: FormControlProps): ReactElement => {
+export const FormControl = ({
+  children,
+  label,
+  error,
+  ...labelProps
+}: FormControlProps): ReactElement => {
   return (
     <div className="flex flex-col gap-2">
       <Label {...labelProps}>
         {label}
       </Label>
       <div>
-        { children }
-        { error && (
+        {children}
+        {error && (
           <span className="block text-red-500 text-sm">
             {error}
           </span>

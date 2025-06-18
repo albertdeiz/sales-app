@@ -5,7 +5,12 @@ import { ApiError } from "@/lib/errors";
 
 import { transformUser } from "./auth.transform";
 
-import type { AuthParams, LoginParams, LoginResponse, RefreshTokenParams } from "@/interfaces/auth.interfaces";
+import type {
+  AuthParams,
+  LoginParams,
+  LoginResponse,
+  RefreshTokenParams,
+} from "@/interfaces/auth.interfaces";
 import type { User } from "@/interfaces/user.interfaces";
 
 export const login = async(params: LoginParams): Promise<LoginResponse> => {
@@ -42,7 +47,10 @@ export const getCurrentUser = async({ accessToken }: AuthParams): Promise<User> 
   }
 };
 
-export const refreshToken = async({ workspaceId, accessToken }: RefreshTokenParams): Promise<LoginResponse> => {
+export const refreshToken = async({
+  workspaceId,
+  accessToken,
+}: RefreshTokenParams): Promise<LoginResponse> => {
   try {
     const { data } = await axios.patch("/v1/sales/auth/refreshTokenData/", {
       workspaceId,

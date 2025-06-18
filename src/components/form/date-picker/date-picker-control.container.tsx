@@ -12,7 +12,9 @@ export type DatePickerControlContainerProps = Omit<DatePickerControlProps, "cont
  * It uses the `useFormContext` hook to access the form methods.
  * This allows it to be used within a form context without needing to pass the control prop explicitly.
  */
-export const DatePickerControlContainer = (props: DatePickerControlContainerProps): ReactElement => {
+export const DatePickerControlContainer = (
+  props: DatePickerControlContainerProps,
+): ReactElement => {
   const methods = useFormContext();
 
   return <DatePickerControl {...methods} {...props} />;

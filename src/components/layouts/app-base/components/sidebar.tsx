@@ -16,7 +16,9 @@ export const Sidebar = () => {
 
   return (
     <aside className="w-60 bg-white border-r h-full p-4">
-      <div className="text-2xl font-bold mb-6 flex items-center gap-2"><Calendar /> Proto Sales</div>
+      <div className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <Calendar /> Proto Sales
+      </div>
       <nav className="flex flex-col gap-2">
         {navItems.map(({ label, icon: Icon, path }) => (
           <Link key={path} to={path}>

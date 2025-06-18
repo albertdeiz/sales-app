@@ -70,7 +70,9 @@ export const getWarehouse = async({ id, accessToken }: GetWarehouseParams): Prom
   }
 };
 
-export const updateWarehouse = async(params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
+export const updateWarehouse = async(
+  params: Partial<Warehouse> & AuthParams,
+): Promise<Warehouse> => {
   const { id, accessToken, ...dataParams } = params;
 
   if (!id) {
@@ -94,7 +96,9 @@ export const updateWarehouse = async(params: Partial<Warehouse> & AuthParams): P
   }
 };
 
-export const createWarehouse = async(params: Partial<Warehouse> & AuthParams): Promise<Warehouse> => {
+export const createWarehouse = async(
+  params: Partial<Warehouse> & AuthParams,
+): Promise<Warehouse> => {
   const { accessToken, ...dataParams } = params;
 
   try {
@@ -114,7 +118,10 @@ export const createWarehouse = async(params: Partial<Warehouse> & AuthParams): P
   }
 };
 
-export const deleteWarehouse = async({ id, accessToken }: { id: number; } & AuthParams): Promise<void> => {
+export const deleteWarehouse = async({
+  id,
+  accessToken,
+}: { id: number; } & AuthParams): Promise<void> => {
   if (!id) {
     throw new ApiError(400, "Warehouse ID is required for deletion");
   }

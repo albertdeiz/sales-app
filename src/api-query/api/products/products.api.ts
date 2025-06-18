@@ -36,7 +36,10 @@ export const createProduct = async(params: CreateProductParams): Promise<Product
   console.log(Number(dataParams.price));
 
   try {
-    const { data } = await axios.post("/v1/sales/products/", { ...dataParams, ...(dataParams.price ? { price: Number(dataParams.price) } : {}) }, {
+    const { data } = await axios.post("/v1/sales/products/", {
+      ...dataParams,
+      ...(dataParams.price ? { price: Number(dataParams.price) } : {}),
+    }, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -56,7 +59,10 @@ export const updateProduct = async(params: UpdateProductParams): Promise<Product
   const { id, accessToken, ...dataParams } = params;
 
   try {
-    const { data } = await axios.patch(`/v1/sales/products/${id}`, { ...dataParams, ...(dataParams.price ? { price: Number(dataParams.price) } : {}) }, {
+    const { data } = await axios.patch(`/v1/sales/products/${id}`, {
+      ...dataParams,
+      ...(dataParams.price ? { price: Number(dataParams.price) } : {}),
+    }, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -72,7 +78,10 @@ export const updateProduct = async(params: UpdateProductParams): Promise<Product
   }
 };
 
-export const deleteProduct = async({ id, accessToken }: { id: number } & AuthParams): Promise<void> => {
+export const deleteProduct = async({
+  id,
+  accessToken,
+}: { id: number } & AuthParams): Promise<void> => {
   if (!id) {
     throw new ApiError(400, "Product ID is required for deletion");
   }

@@ -1,5 +1,18 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 import type { ReactElement, ReactNode } from "react";
 import type { ControllerProps } from "react-hook-form";
@@ -31,7 +44,14 @@ export const SelectControl = ({
     render={({ field: { name, onBlur, onChange, ref, value, disabled } }) => (
       <FormItem>
         {label && <FormLabel>{label}</FormLabel>}
-        <Select onValueChange={onChange} value={value} defaultValue={defaultValue} name={name} disabled={disabled} {...rest}>
+        <Select
+          onValueChange={onChange}
+          value={value}
+          defaultValue={defaultValue}
+          name={name}
+          disabled={disabled}
+          {...rest}
+        >
           <FormControl className='w-full'>
             <SelectTrigger ref={ref} onBlur={onBlur} size={size}>
               <SelectValue placeholder={placeholder} />

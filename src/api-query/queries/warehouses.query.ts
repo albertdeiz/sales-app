@@ -1,14 +1,32 @@
-import { useMutation, useQuery, useQueryClient, type UseMutationResult, type UseQueryResult } from "@tanstack/react-query";
-import { createWarehouse, deleteWarehouse, getWarehouse, getWarehouses, updateWarehouse } from "../api/warehouses/warehouses.api";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+
 import { useAuthContext } from "@/shared/hooks/use-auth-context";
 
+import {
+  createWarehouse,
+  deleteWarehouse,
+  getWarehouse,
+  getWarehouses,
+  updateWarehouse,
+} from "../api/warehouses/warehouses.api";
+
+import type {
+  UseMutationResult,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import type { ListWarehousesParams } from "../api/warehouses/warehouses.api";
 import type { ApiError } from "@/lib/errors";
 import type { Warehouse } from "@/interfaces/warehouse.interfaces";
 
 const WAREHOUSE_KEY = ["warehouses"];
 
-export const useWarehousesQuery = (params: ListWarehousesParams = {}): UseQueryResult<Warehouse[], ApiError> => {
+export const useWarehousesQuery = (
+  params: ListWarehousesParams = {},
+): UseQueryResult<Warehouse[], ApiError> => {
   const { accessToken } = useAuthContext();
 
   return useQuery<Warehouse[], ApiError>({
@@ -29,7 +47,8 @@ export const useWarehouseQuery = (id = 0): UseQueryResult<Warehouse, ApiError> =
   });
 };
 
-export const useUpdateWarehouseMutation = (): UseMutationResult<Warehouse, ApiError, Partial<Warehouse>> => {
+export const useUpdateWarehouseMutation = ():
+  UseMutationResult<Warehouse, ApiError, Partial<Warehouse>> => {
   const queryClient = useQueryClient();
   const { accessToken } = useAuthContext();
 
@@ -49,7 +68,8 @@ export const useUpdateWarehouseMutation = (): UseMutationResult<Warehouse, ApiEr
   });
 };
 
-export const useCreateWarehouseMutation = (): UseMutationResult<Warehouse, ApiError, Partial<Warehouse>> => {
+export const useCreateWarehouseMutation = ():
+  UseMutationResult<Warehouse, ApiError, Partial<Warehouse>> => {
   const queryClient = useQueryClient();
   const { accessToken } = useAuthContext();
 

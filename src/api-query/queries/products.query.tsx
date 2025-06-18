@@ -1,7 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useAuthContext } from "@/shared/hooks/use-auth-context";
-import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../api/products/products.api";
+import {
+  createProduct,
+  deleteProduct,
+  getProduct,
+  getProducts,
+  updateProduct,
+} from "../api/products/products.api";
 import { PRODUCT_KEY } from "../keys/product.key";
 
 import type { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
@@ -28,7 +34,8 @@ export const useProductQuery = (id = 0): UseQueryResult<Product, ApiError> => {
   });
 };
 
-export const useCreateProductMutation = (): UseMutationResult<Product, ApiError, Partial<Product>> => {
+export const useCreateProductMutation = ():
+  UseMutationResult<Product, ApiError, Partial<Product>> => {
   const queryClient = useQueryClient();
   const { accessToken } = useAuthContext();
 
@@ -46,7 +53,8 @@ export const useCreateProductMutation = (): UseMutationResult<Product, ApiError,
   });
 };
 
-export const useUpdateProductMutation = (): UseMutationResult<Product, ApiError, Partial<Product>> => {
+export const useUpdateProductMutation = ():
+  UseMutationResult<Product, ApiError, Partial<Product>> => {
   const queryClient = useQueryClient();
   const { accessToken } = useAuthContext();
 

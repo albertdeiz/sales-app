@@ -11,7 +11,12 @@ export interface UpdateUserParams extends AuthParams {
   lastName?: string;
 }
 
-export const updateUser = async({ id, firstName, lastName, accessToken }: UpdateUserParams): Promise<User> => {
+export const updateUser = async({
+  id,
+  firstName,
+  lastName,
+  accessToken,
+}: UpdateUserParams): Promise<User> => {
   try {
     const { data } = await axios.patch("/v1/sales/user/update", {
       id,

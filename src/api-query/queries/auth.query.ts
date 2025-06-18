@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { useAuthContext } from "@/shared/hooks/use-auth-context";
 import { getCurrentUser, login, refreshToken } from "@/api-query/api/auth/auth.api";
@@ -8,14 +8,12 @@ import type { UseMutationResult } from "@tanstack/react-query";
 import type { AuthParams, LoginParams, LoginResponse } from "@/interfaces/auth.interfaces";
 
 export const useAuthMutation = (): UseMutationResult<LoginResponse, Error, LoginParams> => {
-  const queryClient = useQueryClient();
   const { login: loginUser } = useAuthContext();
 
   return useMutation({
     mutationFn: login,
     onSuccess: (response) => {
       loginUser(response);
-      // queryClient.invalidateQueries({ queryKey: AUTH_KEY });
     },
   });
 };
@@ -29,14 +27,12 @@ export const useCurrentUserQuery = ({ accessToken }: AuthParams) => {
 };
 
 export const useRefreshTokenMutation = (): UseMutationResult<LoginResponse, Error, number> => {
-  const queryClient = useQueryClient();
   const { accessToken, login: loginUser } = useAuthContext();
 
   return useMutation({
     mutationFn: (workspaceId: number) => refreshToken({ workspaceId, accessToken }),
     onSuccess: (response) => {
       loginUser(response);
-      // queryClient.invalidateQueries({ queryKey: AUTH_KEY });
     },
   });
 };
