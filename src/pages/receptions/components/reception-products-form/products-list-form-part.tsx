@@ -80,24 +80,28 @@ export const ProductsListFormPart = ({ control, values }: ProductsListFormPartPr
             <TableCell>{field.product.name}</TableCell>
             <TableCell>
               <InputControlContainer
+                className="min-w-[100px]"
                 name={`receptionProducts.${index}.cost`}
                 type="number"
               />
             </TableCell>
             <TableCell>
               <InputControlContainer
+                className="min-w-[100px]"
                 name={`receptionProducts.${index}.quantity`}
                 type="number"
               />
             </TableCell>
             <TableCell>
               <SelectControlContainer
+                className="min-w-[100px]"
                 name={`receptionProducts.${index}.measurementUnitId`}
                 options={[{ value: "hola", label: "skjaskj" }]}
               />
             </TableCell>
             <TableCell>
               <InputControlContainer
+                className="min-w-[100px]"
                 name={`receptionProducts.${index}.batch`}
               />
             </TableCell>
@@ -107,7 +111,7 @@ export const ProductsListFormPart = ({ control, values }: ProductsListFormPartPr
               />
             </TableCell>
             <TableCell>
-              <Input value={getTotalCost(index)} readOnly disabled />
+              <Input className="min-w-[100px]" value={getTotalCost(index)} readOnly disabled />
             </TableCell>
             <TableCell>
               <Button size="sm" onClick={() => remove(index)}><XIcon /></Button>
