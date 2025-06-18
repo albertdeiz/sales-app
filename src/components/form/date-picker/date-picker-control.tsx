@@ -1,14 +1,14 @@
-import { Controller } from 'react-hook-form';
-import { FormControl } from '@/components/ui/form-control';
-import { DatePicker } from '@/components/ui/date-picker';
+import { Controller } from "react-hook-form";
+import { FormControl } from "@/components/ui/form-control";
+import { DatePicker } from "@/components/ui/date-picker";
 
-import type { ReactElement } from 'react';
-import type { ControllerProps } from 'react-hook-form';
-import type { FormControlProps } from '@/components/ui/form-control';
-import type { DatePickerProps } from '@/components/ui/date-picker';
+import type { ReactElement } from "react";
+import type { ControllerProps } from "react-hook-form";
+import type { FormControlProps } from "@/components/ui/form-control";
+import type { DatePickerProps } from "@/components/ui/date-picker";
 
-export type DatePickerControlProps = Omit<FormControlProps, 'children'> & DatePickerProps &
-  Omit<ControllerProps, 'render'>;
+export type DatePickerControlProps = Omit<FormControlProps, "children"> & DatePickerProps &
+  Omit<ControllerProps, "render">;
 
 /**
  * DatePickerControl is a wrapper around the DatePicker component that integrates it with react-hook-form.
@@ -18,7 +18,7 @@ export type DatePickerControlProps = Omit<FormControlProps, 'children'> & DatePi
 export const DatePickerControl = ({
   name,
   label,
-  defaultValue = '',
+  defaultValue = "",
   control,
   ...rest
 }: DatePickerControlProps): ReactElement => (

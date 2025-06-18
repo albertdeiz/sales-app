@@ -1,1 +1,1 @@
-export const AUTH_KEY = ['auth'] as const;
+export const AUTH_KEY = ["auth"] as const;

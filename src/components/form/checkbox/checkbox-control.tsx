@@ -1,14 +1,14 @@
-import { Controller } from 'react-hook-form';
-import { FormControl } from '@/components/ui/form-control';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Controller } from "react-hook-form";
+import { FormControl } from "@/components/ui/form-control";
+import { Checkbox } from "@/components/ui/checkbox";
 
-import type { ReactElement } from 'react';
-import type { ControllerProps } from 'react-hook-form';
-import type { FormControlProps } from '@/components/ui/form-control';
-import type { CheckboxProps } from '@/components/ui/checkbox';
+import type { ReactElement } from "react";
+import type { ControllerProps } from "react-hook-form";
+import type { FormControlProps } from "@/components/ui/form-control";
+import type { CheckboxProps } from "@/components/ui/checkbox";
 
-export type CheckboxControlProps = Omit<FormControlProps, 'children'> & CheckboxProps &
-  Omit<ControllerProps, 'render'>;
+export type CheckboxControlProps = Omit<FormControlProps, "children"> & CheckboxProps &
+  Omit<ControllerProps, "render">;
 
 /**
  * Component that implement a form control checkbox wrapped on controller provided by react hook form
@@ -16,7 +16,7 @@ export type CheckboxControlProps = Omit<FormControlProps, 'children'> & Checkbox
 export const CheckboxControl = ({
   name,
   label,
-  defaultValue = '',
+  defaultValue = "",
   control,
   ...rest
 }: CheckboxControlProps): ReactElement => (

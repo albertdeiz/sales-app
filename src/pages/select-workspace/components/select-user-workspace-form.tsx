@@ -1,14 +1,14 @@
-import { z as zod } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z as zod } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { SelectControlContainer } from '@/components/form/select/select-control.container';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { SelectControlContainer } from "@/components/form/select/select-control.container";
 
-import type { UserWorkspace } from '@/interfaces/user.interfaces';
-import { Form } from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
-import { InputControlContainer } from '@/components/form/input/input-control.container';
+import type { UserWorkspace } from "@/interfaces/user.interfaces";
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { InputControlContainer } from "@/components/form/input/input-control.container";
 
 export interface FormValues {
   email: string;
@@ -24,11 +24,17 @@ interface SelectUserWorkspaceFormProps {
 }
 
 const schema = zod.object({
-  email: zod.string().email('El correo electrónico no es válido'),
-  workspaceId: zod.string().min(1, 'Debes seleccionar un espacio de trabajo'),
+  email: zod.string().email("El correo electrónico no es válido"),
+  workspaceId: zod.string().min(1, "Debes seleccionar un espacio de trabajo"),
 });
 
-export const SelectUserWorkspaceForm = ({ userWorkspaces, email, isLoading, onSubmit, onExit }: SelectUserWorkspaceFormProps) => {
+export const SelectUserWorkspaceForm = ({
+  userWorkspaces,
+  email,
+  isLoading,
+  onSubmit,
+  onExit,
+}: SelectUserWorkspaceFormProps) => {
   const methods = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {

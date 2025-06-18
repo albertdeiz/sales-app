@@ -1,12 +1,12 @@
-import { useMutation, useQuery, useQueryClient, type UseMutationResult, type UseQueryResult } from '@tanstack/react-query';
-import { createWarehouse, deleteWarehouse, getWarehouse, getWarehouses, updateWarehouse } from '../api/warehouses/warehouses.api';
-import { useAuthContext } from '@/shared/hooks/use-auth-context';
+import { useMutation, useQuery, useQueryClient, type UseMutationResult, type UseQueryResult } from "@tanstack/react-query";
+import { createWarehouse, deleteWarehouse, getWarehouse, getWarehouses, updateWarehouse } from "../api/warehouses/warehouses.api";
+import { useAuthContext } from "@/shared/hooks/use-auth-context";
 
-import type { ListWarehousesParams } from '../api/warehouses/warehouses.api';
-import type { ApiError } from '@/lib/errors';
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
+import type { ListWarehousesParams } from "../api/warehouses/warehouses.api";
+import type { ApiError } from "@/lib/errors";
+import type { Warehouse } from "@/interfaces/warehouse.interfaces";
 
-const WAREHOUSE_KEY = ['warehouses'];
+const WAREHOUSE_KEY = ["warehouses"];
 
 export const useWarehousesQuery = (params: ListWarehousesParams = {}): UseQueryResult<Warehouse[], ApiError> => {
   const { accessToken } = useAuthContext();
@@ -22,7 +22,7 @@ export const useWarehouseQuery = (id = 0): UseQueryResult<Warehouse, ApiError> =
   const { accessToken } = useAuthContext();
 
   return useQuery<Warehouse, ApiError>({
-    queryKey: [...WAREHOUSE_KEY, 'details', id],
+    queryKey: [...WAREHOUSE_KEY, "details", id],
     queryFn: () => getWarehouse({ id, accessToken }),
     staleTime: 1000 * 60 * 5,
     enabled: !!id,
@@ -44,7 +44,7 @@ export const useUpdateWarehouseMutation = (): UseMutationResult<Warehouse, ApiEr
         return oldData.map((item) => (item.id === data.id ? data : item));
       });
 
-      queryClient.setQueryData<Warehouse>([...WAREHOUSE_KEY, 'details', data.id], data);
+      queryClient.setQueryData<Warehouse>([...WAREHOUSE_KEY, "details", data.id], data);
     },
   });
 };
@@ -64,7 +64,7 @@ export const useCreateWarehouseMutation = (): UseMutationResult<Warehouse, ApiEr
         return [...oldData, data];
       });
 
-      queryClient.setQueryData<Warehouse>([...WAREHOUSE_KEY, 'details', data.id], data);
+      queryClient.setQueryData<Warehouse>([...WAREHOUSE_KEY, "details", data.id], data);
     },
   });
 };

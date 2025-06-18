@@ -1,12 +1,12 @@
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormProvider, useForm } from 'react-hook-form';
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
 
-import type { ReactElement } from 'react';
-import { InputControlContainer } from '@/components/form/input/input-control.container';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { User } from '@/interfaces/user.interfaces';
+import type { ReactElement } from "react";
+import { InputControlContainer } from "@/components/form/input/input-control.container";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { User } from "@/interfaces/user.interfaces";
 
 export interface FormValues {
   firstName: string
@@ -22,13 +22,17 @@ export interface UserProfileFormProps {
 const schema = z.object({
   firstName: z
     .string()
-    .min(1, 'El nombre es obligatorio'),
+    .min(1, "El nombre es obligatorio"),
   lastName: z
     .string()
-    .min(1, 'El apellido es obligatorio'),
+    .min(1, "El apellido es obligatorio"),
 });
 
-export const UserProfileForm = ({ isLoading, user: { firstName, lastName }, onSave }: UserProfileFormProps): ReactElement => {
+export const UserProfileForm = ({
+  isLoading,
+  user: { firstName, lastName },
+  onSave,
+}: UserProfileFormProps): ReactElement => {
   const methods = useForm<FormValues>({
     resolver: zodResolver(schema),
     values: {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Product } from '@/interfaces/product.interfaces';
+import type { Product } from "@/interfaces/product.interfaces";
 
 export const transformProduct = (product: any): Product => {
   return {

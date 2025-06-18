@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router';
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 
 export const ReceptionsContainer = () => {
   return (
@@ -12,7 +12,7 @@ export const ReceptionsContainer = () => {
       </div>
       <div>
         <Button asChild>
-          <Link to={'/receptions/new'}>
+          <Link to={"/receptions/new"}>
             Nueva
           </Link>
         </Button>

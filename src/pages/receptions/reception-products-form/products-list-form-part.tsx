@@ -1,16 +1,26 @@
-import { useFieldArray } from 'react-hook-form';
-import { XIcon } from 'lucide-react';
+import { useFieldArray } from "react-hook-form";
+import { XIcon } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { usePrice } from '@/shared/hooks/use-price';
-import { InputControlContainer } from '@/components/form/input/input-control.container';
-import { SelectControlContainer } from '@/components/form/select/select-control.container';
-import { DatePickerControlContainer } from '@/components/form/date-picker/date-picker-control.container';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { usePrice } from "@/shared/hooks/use-price";
+import { InputControlContainer } from "@/components/form/input/input-control.container";
+import { SelectControlContainer } from "@/components/form/select/select-control.container";
+import {
+  DatePickerControlContainer,
+} from "@/components/form/date-picker/date-picker-control.container";
 
-import type { Control } from 'react-hook-form';
-import type { ReceptionProductsFormValues } from './reception-products-form';
+import type { Control } from "react-hook-form";
+import type { ReceptionProductsFormValues } from "./reception-products-form";
 
 export interface ReceptionProductFormValues {
   productId: number;
@@ -33,7 +43,7 @@ export const ProductsListFormPart = ({ control, values }: ProductsListFormPartPr
 
   const { fields, remove } = useFieldArray({
     control,
-    name: 'receptionProducts',
+    name: "receptionProducts",
   });
 
   const getTotalCost = (index: number): string => {
@@ -68,11 +78,34 @@ export const ProductsListFormPart = ({ control, values }: ProductsListFormPartPr
           <TableRow key={field.id}>
             <TableCell><p className='text-xl px-5'>{index + 1}</p></TableCell>
             <TableCell>{field.product.name}</TableCell>
-            <TableCell><InputControlContainer name={`receptionProducts.${index}.cost`} type='number' /></TableCell>
-            <TableCell><InputControlContainer name={`receptionProducts.${index}.quantity`} type='number' /></TableCell>
-            <TableCell><SelectControlContainer name={`receptionProducts.${index}.measurementUnitId`} options={[{ value: 'hola', label: 'skjaskj' }]} /></TableCell>
-            <TableCell><InputControlContainer name={`receptionProducts.${index}.batch`} /></TableCell>
-            <TableCell><DatePickerControlContainer name={`receptionProducts.${index}.expirationDate`} /></TableCell>
+            <TableCell>
+              <InputControlContainer
+                name={`receptionProducts.${index}.cost`}
+                type='number'
+              />
+            </TableCell>
+            <TableCell>
+              <InputControlContainer
+                name={`receptionProducts.${index}.quantity`}
+                type='number'
+              />
+            </TableCell>
+            <TableCell>
+              <SelectControlContainer
+                name={`receptionProducts.${index}.measurementUnitId`}
+                options={[{ value: "hola", label: "skjaskj" }]}
+              />
+            </TableCell>
+            <TableCell>
+              <InputControlContainer
+                name={`receptionProducts.${index}.batch`}
+              />
+            </TableCell>
+            <TableCell>
+              <DatePickerControlContainer
+                name={`receptionProducts.${index}.expirationDate`}
+              />
+            </TableCell>
             <TableCell>
               <Input value={getTotalCost(index)} readOnly disabled />
             </TableCell>

@@ -1,7 +1,7 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-import type { LoginResponse } from '@/interfaces/auth.interfaces';
-import type { User } from '@/interfaces/user.interfaces';
+import type { LoginResponse } from "@/interfaces/auth.interfaces";
+import type { User } from "@/interfaces/user.interfaces";
 
 interface AuthContextType {
   user?: User;

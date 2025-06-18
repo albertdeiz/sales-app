@@ -1,9 +1,9 @@
-import type { User } from '@/interfaces/user.interfaces';
-import { axios } from '@/lib/axios';
-import { transformUser } from '../auth/auth.transform';
-import { isAxiosError } from 'axios';
-import { ApiError } from '@/lib/errors';
-import type { AuthParams } from '@/interfaces/auth.interfaces';
+import type { User } from "@/interfaces/user.interfaces";
+import { axios } from "@/lib/axios";
+import { transformUser } from "../auth/auth.transform";
+import { isAxiosError } from "axios";
+import { ApiError } from "@/lib/errors";
+import type { AuthParams } from "@/interfaces/auth.interfaces";
 
 export interface UpdateUserParams extends AuthParams {
   id: number;
@@ -13,7 +13,7 @@ export interface UpdateUserParams extends AuthParams {
 
 export const updateUser = async({ id, firstName, lastName, accessToken }: UpdateUserParams): Promise<User> => {
   try {
-    const { data } = await axios.patch('/v1/sales/user/update', {
+    const { data } = await axios.patch("/v1/sales/user/update", {
       id,
       firstName,
       lastName,
@@ -29,6 +29,6 @@ export const updateUser = async({ id, firstName, lastName, accessToken }: Update
       throw ApiError.fromAxiosError(error);
     }
 
-    throw new ApiError(500, 'An unexpected error occurred');
+    throw new ApiError(500, "An unexpected error occurred");
   }
 };

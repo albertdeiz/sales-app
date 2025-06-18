@@ -1,12 +1,12 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-import type { ReactElement, ReactNode } from 'react';
-import type { ControllerProps } from 'react-hook-form';
-import type { SelectProps } from '@/components/ui/select';
+import type { ReactElement, ReactNode } from "react";
+import type { ControllerProps } from "react-hook-form";
+import type { SelectProps } from "@/components/ui/select";
 
 export type SelectControlProps = SelectProps &
-  Omit<ControllerProps, 'render'> & {
+  Omit<ControllerProps, "render"> & {
     label?: string;
     description?: ReactNode;
   };

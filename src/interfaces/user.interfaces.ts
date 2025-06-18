@@ -1,5 +1,5 @@
 export interface Role {
-  name: 'SuperAdmin';
+  name: "SuperAdmin";
   routePermissions: [];
   actionPermissions: []
 }

@@ -1,11 +1,11 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
 
-import { SelectControl } from './select-control';
+import { SelectControl } from "./select-control";
 
-import type { SelectControlProps } from './select-control';
-import type { ReactElement } from 'react';
+import type { SelectControlProps } from "./select-control";
+import type { ReactElement } from "react";
 
-export type SelectControlContainerProps = Omit<SelectControlProps, 'control'>;
+export type SelectControlContainerProps = Omit<SelectControlProps, "control">;
 
 /**
  * Reusable container with the form context and form provider, used in nested forms elements.

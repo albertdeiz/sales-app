@@ -1,15 +1,18 @@
-import { useMemo, useState, useCallback } from 'react';
-import { LocalStorageContext } from '../contexts/local-storage.context';
+import { useMemo, useState, useCallback } from "react";
+import { LocalStorageContext } from "../contexts/local-storage.context";
 
-import type { ReactNode } from 'react';
-import type { LocalStorageContextValues, LocalStorageSchema } from '../contexts/local-storage.context';
+import type { ReactNode } from "react";
+import type {
+  LocalStorageContextValues,
+  LocalStorageSchema,
+} from "../contexts/local-storage.context";
 
 interface LocalStorageProviderProps {
   children: ReactNode;
 }
 
 // Clave única para almacenar todos los datos
-const STORAGE_KEY = 'sales-app-storage';
+const STORAGE_KEY = "sales-app-storage";
 
 const loadInitialState = (): Partial<LocalStorageSchema> => {
   const initialState: Partial<LocalStorageSchema> = {};
@@ -20,7 +23,7 @@ const loadInitialState = (): Partial<LocalStorageSchema> => {
       return JSON.parse(storedData);
     }
   } catch (error) {
-    console.error('Error al inicializar el estado desde localStorage:', error);
+    console.error("Error al inicializar el estado desde localStorage:", error);
   }
 
   return initialState;
@@ -39,7 +42,7 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
       } catch (error) {
-        console.error('Error al guardar en localStorage:', error);
+        console.error("Error al guardar en localStorage:", error);
       }
 
       return newState;
@@ -60,7 +63,7 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
       } catch (error) {
-        console.error('Error al guardar en localStorage después de eliminar:', error);
+        console.error("Error al guardar en localStorage después de eliminar:", error);
       }
 
       return newState;
@@ -72,7 +75,7 @@ export function LocalStorageProvider({ children }: LocalStorageProviderProps) {
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (error) {
-      console.error('Error al limpiar localStorage:', error);
+      console.error("Error al limpiar localStorage:", error);
     }
   }, []);
 

@@ -1,6 +1,6 @@
-import { MoreHorizontal } from 'lucide-react';
+import { MoreHorizontal } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,12 +8,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
-import type { ColumnDef } from '@tanstack/react-table';
+import type { Warehouse } from "@/interfaces/warehouse.interfaces";
+import type { ColumnDef } from "@tanstack/react-table";
 
-export type RowActionType = 'delete' | 'edit';
+export type RowActionType = "delete" | "edit";
 
 export interface GetColumnsProps {
   onRowActionClick?(type: RowActionType, item: Warehouse): void;
@@ -21,20 +21,20 @@ export interface GetColumnsProps {
 
 export const getColumns = ({ onRowActionClick }: GetColumnsProps): ColumnDef<Warehouse>[] => [
   {
-    accessorKey: 'name',
-    header: 'Nombre',
+    accessorKey: "name",
+    header: "Nombre",
   },
   {
-    accessorKey: 'location',
-    header: 'Lugar',
+    accessorKey: "location",
+    header: "Lugar",
   },
   {
-    accessorKey: 'posAllowed',
-    header: 'POS Permitido',
-    cell: ({ row }) => (row.original.posAllowed ? 'Sí' : 'No'),
+    accessorKey: "posAllowed",
+    header: "POS Permitido",
+    cell: ({ row }) => (row.original.posAllowed ? "Sí" : "No"),
   },
   {
-    id: 'actions',
+    id: "actions",
     cell: ({ row }) => {
       const warehouse = row.original;
 
@@ -54,12 +54,12 @@ export const getColumns = ({ onRowActionClick }: GetColumnsProps): ColumnDef<War
               Copiar ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => onRowActionClick?.('edit', warehouse)}>
+            <DropdownMenuItem onClick={() => onRowActionClick?.("edit", warehouse)}>
               Ver almacén
             </DropdownMenuItem>
             <DropdownMenuItem
               className='text-red-500'
-              onClick={() => onRowActionClick?.('delete', warehouse)}
+              onClick={() => onRowActionClick?.("delete", warehouse)}
             >
               Eliminar almacén
             </DropdownMenuItem>

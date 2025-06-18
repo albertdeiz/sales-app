@@ -1,12 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useAuthContext } from '@/shared/hooks/use-auth-context';
-import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from '../api/products/products.api';
-import { PRODUCT_KEY } from '../keys/product.key';
+import { useAuthContext } from "@/shared/hooks/use-auth-context";
+import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../api/products/products.api";
+import { PRODUCT_KEY } from "../keys/product.key";
 
-import type { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
-import type { Product } from '@/interfaces/product.interfaces';
-import type { ApiError } from '@/lib/errors';
+import type { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
+import type { Product } from "@/interfaces/product.interfaces";
+import type { ApiError } from "@/lib/errors";
 
 export const useProductsQuery = (): UseQueryResult<Product[], ApiError> => {
   const { accessToken } = useAuthContext();
@@ -22,7 +22,7 @@ export const useProductQuery = (id = 0): UseQueryResult<Product, ApiError> => {
   const { accessToken } = useAuthContext();
 
   return useQuery<Product, ApiError>({
-    queryKey: [...PRODUCT_KEY, 'details', id],
+    queryKey: [...PRODUCT_KEY, "details", id],
     queryFn: () => getProduct({ id, accessToken }),
     enabled: !!id,
   });
@@ -41,7 +41,7 @@ export const useCreateProductMutation = (): UseMutationResult<Product, ApiError,
         return [...oldData, data];
       });
 
-      queryClient.setQueryData<Product>([...PRODUCT_KEY, 'details', data.id], data);
+      queryClient.setQueryData<Product>([...PRODUCT_KEY, "details", data.id], data);
     },
   });
 };
@@ -57,7 +57,7 @@ export const useUpdateProductMutation = (): UseMutationResult<Product, ApiError,
         if (!oldData) return [];
         return oldData.map((item) => (item.id === data.id ? data : item));
       });
-      queryClient.setQueryData<Product>([...PRODUCT_KEY, 'details', data.id], data);
+      queryClient.setQueryData<Product>([...PRODUCT_KEY, "details", data.id], data);
     },
   });
 };

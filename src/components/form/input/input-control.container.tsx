@@ -1,11 +1,11 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
 
-import { InputControl } from './input-control';
+import { InputControl } from "./input-control";
 
-import type { InputControlProps } from './input-control';
-import type { ReactElement } from 'react';
+import type { InputControlProps } from "./input-control";
+import type { ReactElement } from "react";
 
-export type InputControlContainerProps = Omit<InputControlProps, 'control'>;
+export type InputControlContainerProps = Omit<InputControlProps, "control">;
 
 /**
  * Reusable container with the form context and form provider, used in nested forms elements.

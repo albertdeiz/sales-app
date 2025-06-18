@@ -1,10 +1,10 @@
-import { axios } from '@/lib/axios';
-import { warehouseTransform } from './warehouses.transform';
-import { isAxiosError } from 'axios';
-import { ApiError } from '@/lib/errors';
+import { axios } from "@/lib/axios";
+import { warehouseTransform } from "./warehouses.transform";
+import { isAxiosError } from "axios";
+import { ApiError } from "@/lib/errors";
 
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
-import type { AuthParams } from '@/interfaces/auth.interfaces';
+import type { Warehouse } from "@/interfaces/warehouse.interfaces";
+import type { AuthParams } from "@/interfaces/auth.interfaces";
 
 export interface ListWarehousesParams extends AuthParams {
   page?: number;
@@ -17,7 +17,7 @@ export interface GetWarehouseParams extends AuthParams {
   id: number;
 }
 
-const WAREHOUSE_BASE_URL = '/v1/sales/warehouses';
+const WAREHOUSE_BASE_URL = "/v1/sales/warehouses";
 
 export const getWarehouses = async(params: ListWarehousesParams): Promise<Warehouse[]> => {
   const { page, pageSize, search, sort, accessToken } = params ?? {};
@@ -48,7 +48,7 @@ export const getWarehouses = async(params: ListWarehousesParams): Promise<Wareho
       throw ApiError.fromAxiosError(error);
     }
 
-    throw new ApiError(500, 'An unexpected error occurred');
+    throw new ApiError(500, "An unexpected error occurred");
   }
 };
 
@@ -66,7 +66,7 @@ export const getWarehouse = async({ id, accessToken }: GetWarehouseParams): Prom
       throw ApiError.fromAxiosError(error);
     }
 
-    throw new ApiError(500, 'An unexpected error occurred');
+    throw new ApiError(500, "An unexpected error occurred");
   }
 };
 
@@ -74,7 +74,7 @@ export const updateWarehouse = async(params: Partial<Warehouse> & AuthParams): P
   const { id, accessToken, ...dataParams } = params;
 
   if (!id) {
-    throw new ApiError(400, 'Warehouse ID is required for update');
+    throw new ApiError(400, "Warehouse ID is required for update");
   }
 
   try {
@@ -90,7 +90,7 @@ export const updateWarehouse = async(params: Partial<Warehouse> & AuthParams): P
       throw ApiError.fromAxiosError(error);
     }
 
-    throw new ApiError(500, 'An unexpected error occurred');
+    throw new ApiError(500, "An unexpected error occurred");
   }
 };
 
@@ -110,13 +110,13 @@ export const createWarehouse = async(params: Partial<Warehouse> & AuthParams): P
       throw ApiError.fromAxiosError(error);
     }
 
-    throw new ApiError(500, 'An unexpected error occurred');
+    throw new ApiError(500, "An unexpected error occurred");
   }
 };
 
 export const deleteWarehouse = async({ id, accessToken }: { id: number; } & AuthParams): Promise<void> => {
   if (!id) {
-    throw new ApiError(400, 'Warehouse ID is required for deletion');
+    throw new ApiError(400, "Warehouse ID is required for deletion");
   }
 
   try {
@@ -130,6 +130,6 @@ export const deleteWarehouse = async({ id, accessToken }: { id: number; } & Auth
       throw ApiError.fromAxiosError(error);
     }
 
-    throw new ApiError(500, 'An unexpected error occurred');
+    throw new ApiError(500, "An unexpected error occurred");
   }
 };

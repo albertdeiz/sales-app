@@ -1,9 +1,9 @@
-import { useAuthContext } from '@/shared/hooks/use-auth-context';
-import { UserProfileForm, type FormValues } from '../components/user-profile-form';
-import { useUserMutation } from '@/api-query/queries/users/users.mutations';
-import { useCallback } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
-import { AUTH_KEY } from '@/api-query/keys/auth.key';
+import { useAuthContext } from "@/shared/hooks/use-auth-context";
+import { UserProfileForm, type FormValues } from "../components/user-profile-form";
+import { useUserMutation } from "@/api-query/queries/users/users.mutations";
+import { useCallback } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { AUTH_KEY } from "@/api-query/keys/auth.key";
 
 export const ProfileContainer = () => {
   const { user, accessToken } = useAuthContext();

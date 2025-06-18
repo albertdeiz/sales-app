@@ -1,41 +1,41 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import standard from 'eslint-config-standard';
-import pluginN from 'eslint-plugin-n';
-import pluginPromise from 'eslint-plugin-promise';
-import pluginImport from 'eslint-plugin-import';
-import { defineConfig } from 'eslint/config';
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import standard from "eslint-config-standard";
+import pluginN from "eslint-plugin-n";
+import pluginPromise from "eslint-plugin-promise";
+import pluginImport from "eslint-plugin-import";
+import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
-    ignores: ['coverage/', 'dist/'],
+    ignores: ["coverage/", "dist/"],
   },
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
     },
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
+      "react-refresh/only-export-components": [
+        "warn",
         { allowConstantExport: true },
       ],
     },
   },
   pluginReact.configs.flat.recommended,
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: {
       n: pluginN,
       import: pluginImport,
@@ -43,14 +43,23 @@ export default defineConfig([
     },
     rules: {
       ...standard.rules,
-      semi: ['error', 'always'],
-      'comma-dangle': ['error', 'always-multiline'],
-      'space-before-function-paren': ['error', {
-        anonymous: 'never',
-        named: 'never',
-        asyncArrow: 'never',
+      semi: ["error", "always"],
+      quotes: ["error", "double"],
+      "comma-dangle": ["error", "always-multiline"],
+      "space-before-function-paren": ["error", {
+        anonymous: "never",
+        named: "never",
+        asyncArrow: "never",
       }],
-      'react/react-in-jsx-scope': 'off',
+      "max-len": ["error", {
+        code: 100,
+        tabWidth: 2,
+        ignoreComments: true,
+        ignoreUrls: true,
+        ignoreStrings: false,
+        ignoreTemplateLiterals: false,
+      }],
+      "react/react-in-jsx-scope": "off",
     },
   },
 ]);

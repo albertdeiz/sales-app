@@ -1,11 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useAuthContext } from '@/shared/hooks/use-auth-context';
-import { getCurrentUser, login, refreshToken } from '@/api-query/api/auth/auth.api';
-import { AUTH_KEY } from '@/api-query/keys/auth.key';
+import { useAuthContext } from "@/shared/hooks/use-auth-context";
+import { getCurrentUser, login, refreshToken } from "@/api-query/api/auth/auth.api";
+import { AUTH_KEY } from "@/api-query/keys/auth.key";
 
-import type { UseMutationResult } from '@tanstack/react-query';
-import type { AuthParams, LoginParams, LoginResponse } from '@/interfaces/auth.interfaces';
+import type { UseMutationResult } from "@tanstack/react-query";
+import type { AuthParams, LoginParams, LoginResponse } from "@/interfaces/auth.interfaces";
 
 export const useAuthMutation = (): UseMutationResult<LoginResponse, Error, LoginParams> => {
   const queryClient = useQueryClient();

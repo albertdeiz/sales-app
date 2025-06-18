@@ -1,11 +1,11 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
 
-import { CheckboxControl } from './checkbox-control';
+import { CheckboxControl } from "./checkbox-control";
 
-import type { CheckboxControlProps } from './checkbox-control';
-import type { ReactElement } from 'react';
+import type { CheckboxControlProps } from "./checkbox-control";
+import type { ReactElement } from "react";
 
-export type CheckboxControlContainerProps = Omit<CheckboxControlProps, 'control'>;
+export type CheckboxControlContainerProps = Omit<CheckboxControlProps, "control">;
 
 /**
  * Reusable container with the form context and form provider, used in nested forms elements.

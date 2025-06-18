@@ -1,5 +1,5 @@
-import { useProductsQuery } from '@/api-query/queries/products.query';
-import { ReceptionProductsForm } from '../reception-products-form/reception-products-form';
+import { useProductsQuery } from "@/api-query/queries/products.query";
+import { ReceptionProductsForm } from "../reception-products-form/reception-products-form";
 
 export const ReceptionFormContainer = () => {
   const { data = [], isLoading } = useProductsQuery();
@@ -13,7 +13,12 @@ export const ReceptionFormContainer = () => {
         </p>
       </div>
       <div className="w-3/4 flex-1 max-h-full overflow-auto">
-        <ReceptionProductsForm products={data} isFetching={isLoading} isSubmitting={false} onSubmit={(data) => console.log(data)} />
+        <ReceptionProductsForm
+          products={data}
+          isFetching={isLoading}
+          isSubmitting={false}
+          onSubmit={(data) => console.log(data)}
+        />
       </div>
     </div>
   );

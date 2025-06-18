@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export interface LocalStorageSchema {
   userPreferences: {
-    theme: 'light' | 'dark';
+    theme: "light" | "dark";
     language: string;
   };
   accessToken: string;
@@ -10,7 +10,8 @@ export interface LocalStorageSchema {
 
 export interface LocalStorageContextValues {
   setItem: <K extends keyof LocalStorageSchema>(key: K, value: LocalStorageSchema[K]) => void;
-  getItem: <K extends keyof LocalStorageSchema>(key: K, defaultValue?: LocalStorageSchema[K]) => LocalStorageSchema[K] | undefined;
+  getItem: <K extends keyof LocalStorageSchema>(key: K, defaultValue?: LocalStorageSchema[K]) =>
+    LocalStorageSchema[K] | undefined;
   removeItem: (key: keyof LocalStorageSchema) => void;
   clear: () => void;
   state: Partial<LocalStorageSchema>;

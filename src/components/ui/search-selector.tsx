@@ -1,15 +1,18 @@
-import { useState } from 'react';
-import { ChevronsUpDown } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { SearchableList, type ItemObject } from './searchable-list';
+import { useState } from "react";
+import { ChevronsUpDown } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { SearchableList, type ItemObject } from "./searchable-list";
 
 interface SearchSelectorProps<T> {
   options: T[];
   onChange?: (value: T) => void;
 }
 
-export const SearchSelector = <T extends ItemObject>({ options = [], onChange }: SearchSelectorProps<T>) => {
+export const SearchSelector = <T extends ItemObject>({
+  options = [],
+  onChange,
+}: SearchSelectorProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

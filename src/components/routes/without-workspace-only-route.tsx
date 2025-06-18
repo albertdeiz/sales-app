@@ -1,7 +1,7 @@
-import { Navigate, Outlet, useLocation } from 'react-router';
+import { Navigate, Outlet, useLocation } from "react-router";
 
-import { useAuthContext } from '@/shared/hooks/use-auth-context';
-import { LoadingWrapper } from '../ui/loading-wrapper';
+import { useAuthContext } from "@/shared/hooks/use-auth-context";
+import { LoadingWrapper } from "../ui/loading-wrapper";
 
 export const WithoutWorkspaceOnlyRoute = () => {
   const { user, isLoading } = useAuthContext();

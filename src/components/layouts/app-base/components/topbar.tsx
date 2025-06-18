@@ -1,5 +1,5 @@
-import { Input } from '@/components/ui/input';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,7 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 interface TopbarProps {
   userName: string;
@@ -18,9 +18,9 @@ interface TopbarProps {
 
 export const Topbar = ({ userName, email, onLogoutClick, onProfileClick }: TopbarProps) => {
   const avatarInitials = userName
-    .split(' ')
+    .split(" ")
     .map(word => word.charAt(0).toLocaleUpperCase())
-    .join('');
+    .join("");
 
   return (
     <header className="flex items-center justify-between p-4 border-b bg-white">

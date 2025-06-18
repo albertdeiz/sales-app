@@ -1,14 +1,14 @@
 // filepath: /my-sales-app/my-sales-app/src/pages/products/components/product-form.tsx
-import { z as zod } from 'zod';
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z as zod } from "zod";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { InputControlContainer } from '@/components/form/input/input-control.container';
-import { CheckboxControlContainer } from '@/components/form/checkbox/checkbox-control.container';
-import { Button } from '@/components/ui/button';
+import { InputControlContainer } from "@/components/form/input/input-control.container";
+import { CheckboxControlContainer } from "@/components/form/checkbox/checkbox-control.container";
+import { Button } from "@/components/ui/button";
 
-import type { ReactElement } from 'react';
-import type { Product } from '@/interfaces/product.interfaces';
+import type { ReactElement } from "react";
+import type { Product } from "@/interfaces/product.interfaces";
 
 export interface FormValues {
   name: string;
@@ -25,9 +25,9 @@ export interface ProductFormProps {
 }
 
 const schema = zod.object({
-  name: zod.string().min(1, 'Campo obligatorio'),
-  price: zod.string().min(0, 'El precio debe ser mayor o igual a 0'),
-  sku: zod.string().min(1, 'Campo obligatorio'),
+  name: zod.string().min(1, "Campo obligatorio"),
+  price: zod.string().min(0, "El precio debe ser mayor o igual a 0"),
+  sku: zod.string().min(1, "Campo obligatorio"),
   codeEan: zod.string().optional(),
   codeDun: zod.string().optional(),
   available: zod.boolean().default(false),
@@ -37,9 +37,9 @@ export const ProductForm = ({ data, onSubmit }: ProductFormProps): ReactElement 
   const methods = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: data?.name ?? '',
+      name: data?.name ?? "",
       price: data?.price ?? 0,
-      sku: data?.sku ?? '',
+      sku: data?.sku ?? "",
       codeEan: data?.codeEan,
       codeDun: data?.codeDun,
       available: data?.available ?? false,

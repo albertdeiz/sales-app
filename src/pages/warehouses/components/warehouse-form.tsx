@@ -1,14 +1,14 @@
-import { z as zod } from 'zod';
+import { z as zod } from "zod";
 
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { InputControlContainer } from '@/components/form/input/input-control.container';
-import { CheckboxControlContainer } from '@/components/form/checkbox/checkbox-control.container';
-import { Button } from '@/components/ui/button';
+import { InputControlContainer } from "@/components/form/input/input-control.container";
+import { CheckboxControlContainer } from "@/components/form/checkbox/checkbox-control.container";
+import { Button } from "@/components/ui/button";
 
-import type { ReactElement } from 'react';
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
+import type { ReactElement } from "react";
+import type { Warehouse } from "@/interfaces/warehouse.interfaces";
 
 export interface FormValues {
   name: string;
@@ -24,10 +24,10 @@ export interface WarehouseFormProps {
 const schema = zod.object({
   name: zod
     .string()
-    .min(1, 'campo obligatorio'),
+    .min(1, "campo obligatorio"),
   location: zod
     .string()
-    .min(1, 'campo obligatorio'),
+    .min(1, "campo obligatorio"),
   posAllowed: zod
     .boolean()
     .default(false),
@@ -37,8 +37,8 @@ export const WarehouseForm = ({ data, onSubmit }: WarehouseFormProps): ReactElem
   const methods = useForm<FormValues>({
     resolver: zodResolver(schema),
     values: {
-      name: data?.name ?? '',
-      location: data?.location ?? '',
+      name: data?.name ?? "",
+      location: data?.location ?? "",
       posAllowed: data?.posAllowed,
     },
   });

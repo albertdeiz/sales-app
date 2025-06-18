@@ -1,11 +1,11 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
 
-import { DatePickerControl } from './date-picker-control';
+import { DatePickerControl } from "./date-picker-control";
 
-import type { DatePickerControlProps } from './date-picker-control';
-import type { ReactElement } from 'react';
+import type { DatePickerControlProps } from "./date-picker-control";
+import type { ReactElement } from "react";
 
-export type DatePickerControlContainerProps = Omit<DatePickerControlProps, 'control'>;
+export type DatePickerControlContainerProps = Omit<DatePickerControlProps, "control">;
 
 /**
  * Component that implements a date picker control wrapped in a controller provided by react-hook-form.

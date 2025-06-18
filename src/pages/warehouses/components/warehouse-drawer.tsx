@@ -5,14 +5,14 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
-import { Button } from '@/components/ui/button';
-import { LoadingWrapper } from '@/components/ui/loading-wrapper';
-import { WarehouseForm } from './warehouse-form';
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { LoadingWrapper } from "@/components/ui/loading-wrapper";
+import { WarehouseForm } from "./warehouse-form";
 
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
-import type { ReactElement } from 'react';
-import type { FormValues } from './warehouse-form';
+import type { Warehouse } from "@/interfaces/warehouse.interfaces";
+import type { ReactElement } from "react";
+import type { FormValues } from "./warehouse-form";
 
 interface WarehouseDrawerProps {
   data?: Warehouse;
@@ -22,7 +22,13 @@ interface WarehouseDrawerProps {
   onSaveData: (data: FormValues) => void;
 }
 
-export const WarehouseDrawer = ({ isOpen, data, isLoading, onOpenChange, onSaveData }: WarehouseDrawerProps): ReactElement => {
+export const WarehouseDrawer = ({
+  isOpen,
+  data,
+  isLoading,
+  onOpenChange,
+  onSaveData,
+}: WarehouseDrawerProps): ReactElement => {
   return (
     <Drawer open={isOpen} onOpenChange={onOpenChange} direction='right'>
       <DrawerContent>

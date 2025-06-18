@@ -1,11 +1,11 @@
-import { toast } from 'sonner';
+import { toast } from "sonner";
 
-import { useAuthMutation } from '@/api-query/queries/auth.query';
+import { useAuthMutation } from "@/api-query/queries/auth.query";
 
-import { LoginForm } from '../components/login-form';
+import { LoginForm } from "../components/login-form";
 
-import type { ReactElement } from 'react';
-import type { FormValues } from '../components/login-form';
+import type { ReactElement } from "react";
+import type { FormValues } from "../components/login-form";
 
 export const AuthContainer = (): ReactElement => {
   const { mutate, isPending } = useAuthMutation();
@@ -19,10 +19,10 @@ export const AuthContainer = (): ReactElement => {
       password,
     }, {
       onSuccess: () => {
-        toast.success('Login exitoso');
+        toast.success("Login exitoso");
       },
       onError: () => {
-        toast.error('Error al iniciar sesión, verifique sus credenciales');
+        toast.error("Error al iniciar sesión, verifique sus credenciales");
       },
     });
   };

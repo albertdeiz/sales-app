@@ -1,7 +1,7 @@
-import { Label } from './label';
+import { Label } from "./label";
 
-import type { ReactElement, ReactNode } from 'react';
-import type { LabelProps } from './label';
+import type { ReactElement, ReactNode } from "react";
+import type { LabelProps } from "./label";
 
 export interface FormControlProps extends LabelProps {
   label?: string;

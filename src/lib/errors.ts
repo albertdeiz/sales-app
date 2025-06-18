@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { AxiosError } from 'axios';
+import type { AxiosError } from "axios";
 
 export class ApiError extends Error {
   public status: number;
@@ -13,7 +13,7 @@ export class ApiError extends Error {
     details?: any,
   ) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
     this.status = status;
     this.message = message;
     this.details = details;
@@ -22,7 +22,7 @@ export class ApiError extends Error {
   static fromAxiosError(error: AxiosError): ApiError {
     return new ApiError(
       error.response?.status || 500,
-      error.message || 'An error occurred',
+      error.message || "An error occurred",
       error.response?.data,
     );
   }

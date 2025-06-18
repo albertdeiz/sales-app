@@ -1,12 +1,19 @@
-import { MoreHorizontal } from 'lucide-react';
+import { MoreHorizontal } from "lucide-react";
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
-import type { ColumnDef } from '@tanstack/react-table';
-import type { Product } from '@/interfaces/product.interfaces';
+import type { ColumnDef } from "@tanstack/react-table";
+import type { Product } from "@/interfaces/product.interfaces";
 
-export type RowActionType = 'delete' | 'edit';
+export type RowActionType = "delete" | "edit";
 
 export interface GetColumnsProps {
   onRowActionClick?(type: RowActionType, item: Product): void;
@@ -14,24 +21,24 @@ export interface GetColumnsProps {
 
 export const getColumns = ({ onRowActionClick }: GetColumnsProps): ColumnDef<Product>[] => [
   {
-    accessorKey: 'name',
-    header: 'Nombre',
+    accessorKey: "name",
+    header: "Nombre",
   },
   {
-    accessorKey: 'price',
-    header: 'Precio',
+    accessorKey: "price",
+    header: "Precio",
   },
   {
-    accessorKey: 'sku',
-    header: 'SKU',
+    accessorKey: "sku",
+    header: "SKU",
   },
   {
-    accessorKey: 'available',
-    header: 'Disponible',
-    cell: ({ row }) => (row.original.available ? 'Sí' : 'No'),
+    accessorKey: "available",
+    header: "Disponible",
+    cell: ({ row }) => (row.original.available ? "Sí" : "No"),
   },
   {
-    id: 'actions',
+    id: "actions",
     cell: ({ row }) => {
       const product = row.original;
 
@@ -51,12 +58,12 @@ export const getColumns = ({ onRowActionClick }: GetColumnsProps): ColumnDef<Pro
               Copiar ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => onRowActionClick?.('edit', product)}>
+            <DropdownMenuItem onClick={() => onRowActionClick?.("edit", product)}>
               Ver producto
             </DropdownMenuItem>
             <DropdownMenuItem
               className='text-red-500'
-              onClick={() => onRowActionClick?.('delete', product)}
+              onClick={() => onRowActionClick?.("delete", product)}
             >
               Eliminar almacén
             </DropdownMenuItem>

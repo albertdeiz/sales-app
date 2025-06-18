@@ -1,13 +1,13 @@
-import { z as zod } from 'zod';
+import { z as zod } from "zod";
 
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { InputControlContainer } from '@/components/form/input/input-control.container';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { InputControlContainer } from "@/components/form/input/input-control.container";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-import type { ReactElement } from 'react';
+import type { ReactElement } from "react";
 
 export interface FormValues {
   email: string
@@ -22,11 +22,11 @@ export interface LoginFormProps {
 const schema = zod.object({
   email: zod
     .string()
-    .min(1, 'El correo electrónico es obligatorio')
-    .email('El correo electrónico no es válido'),
+    .min(1, "El correo electrónico es obligatorio")
+    .email("El correo electrónico no es válido"),
   password: zod
     .string()
-    .min(1, 'La contraseña es obligatoria'),
+    .min(1, "La contraseña es obligatoria"),
 });
 
 export const LoginForm = ({ isLoading, onLogin }: LoginFormProps): ReactElement => {

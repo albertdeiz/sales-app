@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
+import type { Warehouse } from "@/interfaces/warehouse.interfaces";
 
 export const warehouseTransform = (warehouse: any): Warehouse => {
   return {

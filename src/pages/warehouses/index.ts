@@ -1,1 +1,1 @@
-export { WarehousesContainer as default } from './containers/warehouses.container';
+export { WarehousesContainer as default } from "./containers/warehouses.container";

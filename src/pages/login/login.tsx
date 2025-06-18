@@ -1,4 +1,4 @@
-import { AuthContainer } from './containers/auth.container';
+import { AuthContainer } from "./containers/auth.container";
 
 export const Login = () => {
   return (

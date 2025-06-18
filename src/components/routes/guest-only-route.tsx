@@ -1,6 +1,6 @@
-import { Navigate, Outlet } from 'react-router';
-import { useAuthContext } from '@/shared/hooks/use-auth-context';
-import { LoadingWrapper } from '@/components/ui/loading-wrapper';
+import { Navigate, Outlet } from "react-router";
+import { useAuthContext } from "@/shared/hooks/use-auth-context";
+import { LoadingWrapper } from "@/components/ui/loading-wrapper";
 
 export const GuestOnlyRoute = () => {
   const { user, isLoading } = useAuthContext();

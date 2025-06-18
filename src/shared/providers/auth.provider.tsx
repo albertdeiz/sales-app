@@ -1,13 +1,13 @@
-import { useCallback, useEffect } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
+import { useCallback, useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { AuthContext } from '@/shared/contexts/auth.context';
-import { useLocalStorageContext } from '@/shared/hooks/use-local-storage-context';
-import { useCurrentUserQuery } from '@/api-query/queries/auth.query';
-import { AUTH_KEY } from '@/api-query/keys/auth.key';
+import { AuthContext } from "@/shared/contexts/auth.context";
+import { useLocalStorageContext } from "@/shared/hooks/use-local-storage-context";
+import { useCurrentUserQuery } from "@/api-query/queries/auth.query";
+import { AUTH_KEY } from "@/api-query/keys/auth.key";
 
-import type { LoginResponse } from '@/interfaces/auth.interfaces';
-import type { ReactNode } from 'react';
+import type { LoginResponse } from "@/interfaces/auth.interfaces";
+import type { ReactNode } from "react";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -19,17 +19,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const queryClient = useQueryClient();
 
   const login = useCallback(({ accessToken }: LoginResponse) => {
-    setItem('accessToken', accessToken);
+    setItem("accessToken", accessToken);
   }, [setItem]);
 
   const logout = useCallback(() => {
-    removeItem('accessToken');
+    removeItem("accessToken");
     queryClient.setQueriesData({ queryKey: AUTH_KEY }, null);
   }, [queryClient, removeItem]);
 
   useEffect(() => {
     if (isError) {
-      logout();
+      // logout();
     }
   }, [isError, logout]);
 

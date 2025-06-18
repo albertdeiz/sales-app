@@ -1,24 +1,31 @@
-import { useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { PlusCircle } from 'lucide-react';
-import { toast } from 'sonner';
+import { useCallback } from "react";
+import { useNavigate, useParams } from "react-router";
+import { PlusCircle } from "lucide-react";
+import { toast } from "sonner";
 
-import { Button } from '@/components/ui/button';
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   useWarehouseQuery,
   useWarehousesQuery,
   useUpdateWarehouseMutation,
   useCreateWarehouseMutation,
   useDeleteWarehouseMutation,
-} from '@/api-query/queries/warehouses.query';
+} from "@/api-query/queries/warehouses.query";
 
-import { WarehousesTable } from '../components/warehouses-table/warehouses-table';
-import { WarehouseDrawer } from '../components/warehouse-drawer';
+import { WarehousesTable } from "../components/warehouses-table/warehouses-table";
+import { WarehouseDrawer } from "../components/warehouse-drawer";
 
-import type { FormValues } from '../components/warehouse-form';
-import type { RowActionType } from '../components/warehouses-table/warehouses-table.columns';
-import type { Warehouse } from '@/interfaces/warehouse.interfaces';
+import type { FormValues } from "../components/warehouse-form";
+import type { RowActionType } from "../components/warehouses-table/warehouses-table.columns";
+import type { Warehouse } from "@/interfaces/warehouse.interfaces";
 
 export const WarehousesContainer = () => {
   const navigate = useNavigate();
@@ -35,30 +42,30 @@ export const WarehousesContainer = () => {
   const handleOnChangeIsOpen = useCallback(
     (isOpen: boolean) => {
       if (!isOpen) {
-        navigate('/warehouses');
+        navigate("/warehouses");
       }
     },
     [navigate],
   );
 
   const handleClickNew = useCallback(() => {
-    navigate('/warehouses/new');
+    navigate("/warehouses/new");
   }, [navigate]);
 
   const handleRemoveWarehouse = useCallback((id: number) => {
     deleteWarehouse(id, {
       onSuccess: () => {
-        toast.success('Almacén eliminado correctamente');
+        toast.success("Almacén eliminado correctamente");
       },
     });
   }, [deleteWarehouse]);
 
   const handleRowActionClick = useCallback((type: RowActionType, item: Warehouse) => {
-    if (type === 'edit') {
+    if (type === "edit") {
       navigate(`/warehouses/${item.id}`);
     }
 
-    if (type === 'delete') {
+    if (type === "delete") {
       handleRemoveWarehouse(item.id);
     }
   }, [handleRemoveWarehouse, navigate]);
@@ -67,15 +74,15 @@ export const WarehousesContainer = () => {
     if (!warehouse?.id) {
       createWarehouse(values, {
         onSuccess: () => {
-          navigate('/warehouses');
-          toast.success('Almacén creado correctamente');
+          navigate("/warehouses");
+          toast.success("Almacén creado correctamente");
         },
       });
     } else {
       updateWarehouse({ id: warehouse?.id, ...values }, {
         onSuccess: () => {
-          navigate('/warehouses');
-          toast.success('Almacén actualizado correctamente');
+          navigate("/warehouses");
+          toast.success("Almacén actualizado correctamente");
         },
       });
     }
@@ -94,7 +101,11 @@ export const WarehousesContainer = () => {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <WarehousesTable data={data} isLoading={isLoading} onRowActionClick={handleRowActionClick} />
+        <WarehousesTable
+          data={data}
+          isLoading={isLoading}
+          onRowActionClick={handleRowActionClick}
+        />
       </CardContent>
       <WarehouseDrawer
         isOpen={!!id}
