@@ -6,6 +6,7 @@ import { SelectControlContainer } from '@/components/form/select/select-control.
 
 import type { Control } from 'react-hook-form';
 import type { ReceptionProductsFormValues } from './reception-products-form';
+import { usePrice } from '@/shared/hooks/use-price';
 
 export interface ReceptionProductFormValues {
   productId: number;
@@ -24,6 +25,8 @@ interface ProductsListFormPartProps {
 }
 
 export const ProductsListFormPart = ({ control, values }: ProductsListFormPartProps) => {
+  const formatPrice = usePrice();
+
   const { fields, remove } = useFieldArray({
     control,
     name: 'receptionProducts',
@@ -43,8 +46,7 @@ export const ProductsListFormPart = ({ control, values }: ProductsListFormPartPr
             <SelectControlContainer label="Unidad de medida" name={`receptionProducts.${index}.measurementUnitId`} options={[{ value: 'hola', label: 'skjaskj' }]} />
             <InputControlContainer label="Lote" name={`receptionProducts.${index}.batch`} />
             <InputControlContainer label="Fecha de expiración" name={`receptionProducts.${index}.expirationDate`} />
-            <p>costo: {field.cost * field.quantity}</p>
-            <p>costo: {values[index].quantity}</p>
+            <p>costo: {formatPrice(values[index].cost * values[index].quantity)}</p>
           </div>
         </div>
       ))}
