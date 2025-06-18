@@ -23,6 +23,7 @@ export const SearchSelector = <T extends ItemObject>({
           role="combobox"
           aria-expanded={isOpen}
           className="w-full justify-between"
+          size="lg"
         >
           Selecciona una opción
           <ChevronsUpDown className="opacity-50" />

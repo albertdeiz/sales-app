@@ -85,26 +85,34 @@ export const ReceptionProductsForm = ({
 
   return (
     <Form {...methods}>
-      <form className="flex h-full gap-4" onSubmit={methods.handleSubmit(onSubmit)}>
-        <div className="w-1/4 flex flex-col gap-4">
-          <h1 className="text-1xl font-bold">Nueva recepción</h1>
-          <SelectControlContainer label="Almacén" name="warehouseId" options={warehouseOptions} />
-          <SelectControlContainer label="Proveedor" name="vendorId" options={vendorOptions} />
-          <SelectControlContainer label="Responsable" name="userId" options={responsibleOptions} />
-          <Button type='submit' disabled={isSubmitting}>Guardar</Button>
-        </div>
-        <div className="w-3/4 flex-1 h-full flex flex-col">
-          <div className='bg-white p-4 border-b'>
-            <LoadingWrapper isLoading={isFetching}>
-              <SearchSelector options={products} onChange={onAddProduct} />
-            </LoadingWrapper>
-          </div>
-
-          <div className="max-h-full flex-1 overflow-hidden">
-            <ProductsListFormPart
-              control={methods.control}
-              values={methods.watch("receptionProducts")}
+      <form className="flex overflow-auto" onSubmit={methods.handleSubmit(onSubmit)}>
+        <div className="w-1/4">
+          <div className="flex flex-col gap-4 px-4">
+            <h1 className="text-1xl font-bold">Nueva recepción</h1>
+            <SelectControlContainer label="Almacén" name="warehouseId" options={warehouseOptions} />
+            <SelectControlContainer label="Proveedor" name="vendorId" options={vendorOptions} />
+            <SelectControlContainer
+              label="Responsable"
+              name="userId"
+              options={responsibleOptions}
             />
+            <Button type='submit' disabled={isSubmitting}>Guardar</Button>
+          </div>
+        </div>
+        <div className="w-3/4">
+          <div className=" flex-1 h-full flex flex-col">
+            <div className='p-4 pt-0'>
+              <LoadingWrapper isLoading={isFetching}>
+                <SearchSelector options={products} onChange={onAddProduct} />
+              </LoadingWrapper>
+            </div>
+
+            <div className="flex-1 overflow-auto">
+              <ProductsListFormPart
+                control={methods.control}
+                values={methods.watch("receptionProducts")}
+              />
+            </div>
           </div>
         </div>
       </form>

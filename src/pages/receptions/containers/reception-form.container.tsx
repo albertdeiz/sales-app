@@ -2,17 +2,18 @@ import { useMemo } from "react";
 
 import { useProductsQuery } from "@/api-query/queries/products.query";
 import { useWarehousesQuery } from "@/api-query/queries/warehouses.query";
+import { useUsersQuery } from "@/api-query/queries/users/users.query";
+import { useCreateReceptionMutation } from "@/api-query/queries/receptions.query";
+import { LoadingWrapper } from "@/components/ui/loading-wrapper";
+import { Card } from "@/components/ui/card";
 
 import {
   ReceptionProductsForm,
 } from "../components/reception-products-form/reception-products-form";
-import { useUsersQuery } from "@/api-query/queries/users/users.query";
 
 import type {
   ReceptionProductsFormValues,
 } from "../components/reception-products-form/reception-products-form";
-import { useCreateReceptionMutation } from "@/api-query/queries/receptions.query";
-import { LoadingWrapper } from "@/components/ui/loading-wrapper";
 
 export const ReceptionFormContainer = () => {
   const { data: products = [], isLoading } = useProductsQuery();
@@ -82,15 +83,17 @@ export const ReceptionFormContainer = () => {
 
   return (
     <LoadingWrapper isLoading={isPending}>
-      <ReceptionProductsForm
-        products={products}
-        responsibleOptions={responsibleOptions}
-        warehouseOptions={warehouseOptions}
-        vendorOptions={verdorOptions}
-        isFetching={isLoading}
-        isSubmitting={isPending}
-        onSubmit={handleSubmit}
-      />
+      <Card className="max-h-full max-w-full overflow-hidden h-full">
+        <ReceptionProductsForm
+          products={products}
+          responsibleOptions={responsibleOptions}
+          warehouseOptions={warehouseOptions}
+          vendorOptions={verdorOptions}
+          isFetching={isLoading}
+          isSubmitting={isPending}
+          onSubmit={handleSubmit}
+        />
+      </Card>
     </LoadingWrapper>
   );
 };
